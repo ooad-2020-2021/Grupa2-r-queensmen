@@ -1,1 +1,1 @@
-# Grupa2-r-queensmen
+# Grupa2-r/queensmen
