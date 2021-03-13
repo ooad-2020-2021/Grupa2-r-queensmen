@@ -26,7 +26,7 @@ Sve to počinje tako što administrator kreira korisnike i predmete. Zatim profe
 * planer ishrane
 * planer treninga
 * kalendar zadovoljstva
-* integracija Google Maps-a
+* integracija Google Maps-a za pronalazak bitnih mjesta
  
 **Profesor:**
 * sve što i student (prilagođeno)
