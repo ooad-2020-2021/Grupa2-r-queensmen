@@ -25,6 +25,7 @@ Sve to počinje tako što administrator kreira korisnike i predmete. Zatim profe
 * upravljanje rasporedom za privatni život
 * planer ishrane
 * planer treninga
+* kalendar zadovoljstva
 * integracija Google Maps-a
  
 **Profesor:**
