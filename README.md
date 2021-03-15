@@ -9,12 +9,11 @@ Tema: Fakultetski planer
 
 ## Opis teme:
 Svjedoci smo velikog broja aplikacija koje pomažu studentima u organizaciji svojih fakultetskih obaveza, zdravlja i privatnog zivota. Međutim, ono što fali jeste jedna aplikacija koja će objediniti veliki broj funkcionalnosti koje te aplikacije pružaju. A upravo to je glavni cilj koji želimo da postignemo.   
-Ova aplikacija objedinjuje najbitnije sfere života ne samo studenata, već i fakultetskih zaposlenika, kao što su: raspored fakultetskih obaveza, raspored privatnih obaveza, očuvanje zdravlja kroz ishranu i trening i administratorske mogućnosti za profesore i asistente.   
-Sve to počinje tako što administrator kreira korisnike. Zatim profesori za kreiraju predmete i zadužuju asistente. U postojeće predmete student ima uvid i samostalno se upisuje. Vremena predavanja i održavanja vježbi definiše profesor, a sve te izmjene se studentima na rasporedu prikazuju. Pored predavanja i vježbi, student može na raspored zakačiti po volji svoje obaveze. Nakon toga, svi korisnici mogu u potpunosti započeti korištenje aplikacije.
+Ova aplikacija objedinjuje najbitnije sfere života ne samo studenata, već i fakultetskih zaposlenika, kao što su: raspored fakultetskih obaveza, raspored privatnih obaveza, očuvanje zdravlja kroz ishranu i trening i administratorske mogućnosti za profesore.   
+Sve to počinje tako što administrator kreira korisnike. Zatim profesori kreiraju predmete na koje se studenti samostalno upisuju. Vremena predavanja i održavanja vježbi definiše profesor, a sve te izmjene se studentima na rasporedu prikazuju. Pored predavanja i vježbi, student može na raspored zakačiti po volji svoje obaveze. Nakon toga, svi korisnici mogu u potpunosti započeti korištenje aplikacije.
 
 ## Akteri:
 * Student
-* Asistent
 * Profesor
 * Administrator
 
@@ -30,16 +29,9 @@ Sve to počinje tako što administrator kreira korisnike. Zatim profesori za kre
  
 **Profesor:**
 * sve što i student (prilagođeno)
-* upravljanje predmetima
+* upravljanje vlastitim predmetima
 * upravljanje rasporedom događaja
-* upravljanje asistentima na predmetima
-* upravljanje studentima na predmetima
-
-**Asistenti:**
-* sve što i student (prilagođeno)
-* upravljanje rasporedom događaja
-* upravljanje studentima na predmetima
 
 **Administrator:**
 * upravljanje korisnicima
-* upravljanje predmetima
+* kreiranje predmeta
