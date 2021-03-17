@@ -1,0 +1,44 @@
+Životni planer
+?lanovi tima: 
+    • Denina Šiljegovi?
+    • Omar Sari?
+    • Muris Sladi?
+    • Elvir Vlahovljak
+
+Namjena sistema:
+Svjedoci smo postojanja velikog broja aplikacija koje omogu?avaju korisniku lakšu i bolju organizaciju svih sfera svog života, i u tome odli?no uspijevaju. Me?utim, ono što fali jeste jedna aplikacija koja ?e objediniti veliki broj takvih aplikacija u jednu. Upravo to je primarni cilj koji želimo da postignemo. 
+Koje je sfere života ova aplikacija uzela u razmatranje? One najbitnije potrebne za o?uvanje zdravlja u svakom obliku. Neke od mogu?nosti ove aplikacije su:
+    • uvid u raspored obaveza, kako na mjese?nom nivou, tako i na dnevnom
+    • sumarizacija svih obaveza današnjeg dana
+    • organizacija zdrave ishrane kroz mogu?nosti kreiranja i pregleda recepata
+    • organizacija redovnog vježbanja kroz mogu?nosti kreiranja i pregleda vježbi
+    • organizacija redovne konzumacije vode kroz korisni?ki postavljen interval notifikacija
+    • prikaz kalendara zadovoljstva za svaki pojedini dan
+
+Ko su korisnici ove aplikacije?
+Kao studenti, najviše bi voljeli da ovu aplikaciju upravo koriste drugi studenti, uz to ne zaboravljaju?i nas same. Ali generalno, naša publika su svi ljudi koji imaju pristup internetu, samim tim i ovoj aplikaciji. Sa stanovišta sistema, sistem mogu da koriste:
+    • neregistrovani korisnici
+    • registrovani korisnici
+    • administrator sistema
+
+
+Funkcionalni zahtjevi
+    • Neregistrovani korisnik
+        ? mogu?nost registracije
+        ? pristup kalendaru, kako mjese?nom, tako i dnevnom
+        ? uvid u sumarizaciju obaveza današnjeg dana
+    • Registrovani korisnik
+        ? pristup planeru za ishranu 
+        ? pristup planeru za konzumiranje vode
+        ? pristup planeru za vježbe
+        ? pristup kalendaru zadovoljstva po pojedina?nim danima
+    • Administrator
+        ? uvid u ra?une svih prijavljenih korisnika
+        ? mogu?nost brisanja svih ra?una po potrebi
+Nefunkcionalni zahtjevi:
+    • planer za ishranu je podijeljen na oblasti: doru?ak, ru?ak, ve?era, užina
+    • planer za trening je podijeljen na oblasti: ruke, torso, le?a, noge
+    • za bilježenje doga?aja u kalendaru bi?e dostupno više boja
+    • prilikom otvaranja aplikacije korisnika ?e po želji do?ekati inspirativna poruka
+    • korisnik ?e za vježbe imati mogu?nost pretrage ve? nekih postoje?ih vježbi
+    • korisnik ?e za recepte imati mogu?nost pretrage ve? nekih postoje?ih recepata
