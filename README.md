@@ -18,16 +18,21 @@ Ova aplikacija objedinjuje najbitnije sfere svakodnevnog života: raspored obave
 
 ## Funkcionalnosti:
 **Neregistrovani korisnik:**   
+* mogućnost registracije
 * sumarizacija obaveza današnjeg dana
 * upravljanje kalendarom događaja
  
 **Registrovani korisnik:**
 * sve što i neregistrovani korisnik
+* uređivanje svog korisničkog računa
 * planer ishrane
 * planer treninga
 * određivanje intervala notifikacije za konzumiranje vode
 * kalendar zadovoljstva
+* pretraga već nekih postojećih recepata
+* pretraga već nekih postojećih vježbi
 
 **Administrator:**
-* pregled prijavljenih korisnika
+* uvid u račune registrovanih korisnika
 * brisanje korisničkih računa po potrebi
+* izmjena korisničkih računa po potrebi
