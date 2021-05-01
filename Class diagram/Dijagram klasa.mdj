@@ -3555,15 +3555,17 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 603,
+									"left": 583,
 									"top": 728,
+									"width": 41.919921875,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
 									"hostEdge": {
 										"$ref": "AAAAAAF4vb24kMuNjxI="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«uses»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4031,17 +4033,18 @@
 									"model": {
 										"$ref": "AAAAAAF5H2UxcyDRuGY="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
-									"left": 471,
-									"top": 561,
+									"left": 456,
+									"top": 520,
+									"width": 41.919921875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": 4.618651177290554,
+									"distance": 12.165525060596439,
 									"hostEdge": {
 										"$ref": "AAAAAAF5H2UxdCDSaow="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«uses»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4308,17 +4311,18 @@
 									"model": {
 										"$ref": "AAAAAAF5H2V1viLPK/I="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
-									"left": 422,
+									"left": 402,
 									"top": 749,
+									"width": 41.919921875,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
 									"hostEdge": {
 										"$ref": "AAAAAAF5H2V1viLQKoc="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«uses»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4552,15 +4556,17 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 909,
+									"left": 892,
 									"top": 295,
+									"width": 35.0517578125,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
 									"hostEdge": {
 										"$ref": "AAAAAAF5H2XU6SiHlJw="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "+uses"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4571,17 +4577,18 @@
 									"model": {
 										"$ref": "AAAAAAF5H2XU6SiGqTM="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
-									"left": 895,
+									"left": 875,
 									"top": 289,
+									"width": 41.919921875,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
 									"hostEdge": {
 										"$ref": "AAAAAAF5H2XU6SiHlJw="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«uses»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4665,17 +4672,18 @@
 									"model": {
 										"$ref": "AAAAAAF5KKTXsIac7k0="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
-									"left": 357,
-									"top": 523,
+									"left": 337,
+									"top": 527,
+									"width": 41.919921875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -4.639954037356035,
+									"distance": 26.419689627245813,
 									"hostEdge": {
 										"$ref": "AAAAAAF5KKTXsoadn2g="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«uses»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5368,7 +5376,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAF5H2W5Tyfe6hc="
-							}
+							},
+							"stereotype": "uses"
 						}
 					],
 					"attributes": [
@@ -5526,7 +5535,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAF5H2UUcCApqKU="
-							}
+							},
+							"stereotype": "uses"
 						}
 					],
 					"attributes": [
@@ -6138,7 +6148,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAF5H2UUcCApqKU="
-							}
+							},
+							"stereotype": "uses"
 						}
 					],
 					"attributes": [
@@ -6279,7 +6290,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAF5H2VJYCHMp4U="
-							}
+							},
+							"stereotype": "uses"
 						}
 					],
 					"attributes": [
