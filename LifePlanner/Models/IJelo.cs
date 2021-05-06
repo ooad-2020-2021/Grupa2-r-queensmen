@@ -7,8 +7,8 @@ namespace LifePlanner.Models
 {
     interface IJelo
     {
-        public void dodajJelo(Jelo jelo);
-        public void obrisiJelo(int id);
-        public void urediJelo(int id, Jelo jelo);
+        public void DodajJelo(Jelo jelo);
+        public void ObrisiJelo(int id);
+        public void UrediJelo(int id, Jelo jelo);
     }
 }

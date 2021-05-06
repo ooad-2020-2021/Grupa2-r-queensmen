@@ -7,8 +7,8 @@ namespace LifePlanner.Models
 {
     interface ITrening
     {
-        public void dodajTrening(Trening trening);
-        public void obrisiTrening(int id);
-        public void urediTrening(int id, Trening trening);
+        public void DodajTrening(Trening trening);
+        public void ObrisiTrening(int id);
+        public void UrediTrening(int id, Trening trening);
     }
 }

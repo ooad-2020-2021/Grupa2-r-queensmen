@@ -19,67 +19,67 @@ namespace LifePlanner.Models
         public List<Voda> PopijenaVoda { get; set; }
         public List<Raspolozenje> Raspolozenja { get; set; }
 
-        public void dodajJelo(Jelo jelo)
+        public void DodajJelo(Jelo jelo)
         {
             Jela.Add(jelo);
         }
 
-        public void dodajRaspolozenje(Raspolozenje raspolozenje)
+        public void DodajRaspolozenje(Raspolozenje raspolozenje)
         {
             Raspolozenja.Add(raspolozenje);
         }
 
-        public void dodajTask(Task task)
+        public void DodajTask(Task task)
         {
             Taskovi.Add(task);
         }
 
-        public void dodajTrening(Trening trening)
+        public void DodajTrening(Trening trening)
         {
             Treninzi.Add(trening);
         }
 
-        public void dodajVodu(Voda voda)
+        public void DodajVodu(Voda voda)
         {
             PopijenaVoda.Add(voda);
         }
 
-        public void obrisiJelo(int id)
+        public void ObrisiJelo(int id)
         {
             var jeloZaBrisanje = Jela.SingleOrDefault<Jelo>(j => j.Id == id);
             if (jeloZaBrisanje == null) return;
             Jela.Remove(jeloZaBrisanje);
         }
 
-        public void obrisiTask(int id)
+        public void ObrisiTask(int id)
         {
             var taskZaBrisanje = Taskovi.SingleOrDefault<Task>(j => j.Id == id);
             if (taskZaBrisanje == null) return;
             Taskovi.Remove(taskZaBrisanje);
         }
 
-        public void obrisiTrening(int id)
+        public void ObrisiTrening(int id)
         {
             var treningZaBrisanje = Treninzi.SingleOrDefault<Trening>(j => j.Id == id);
             if (treningZaBrisanje == null) return;
             Treninzi.Remove(treningZaBrisanje);
         }
 
-        public void urediJelo(int id, Jelo jelo)
+        public void UrediJelo(int id, Jelo jelo)
         {
             var jeloZaPromjenu = Jela.SingleOrDefault<Jelo>(j => j.Id == id);
             if (jeloZaPromjenu == null) return;
             jeloZaPromjenu = jelo;
         }
 
-        public void urediTask(int id, Task task)
+        public void UrediTask(int id, Task task)
         {
             var taskZaPromjenu = Taskovi.SingleOrDefault<Task>(t => t.Id == id);
             if (taskZaPromjenu == null) return;
             taskZaPromjenu = task;
         }
 
-        public void urediTrening(int id, Trening trening)
+        public void UrediTrening(int id, Trening trening)
         {
             var treningZaPromjenu = Treninzi.SingleOrDefault<Trening>(tr => tr.Id == id);
             if (treningZaPromjenu == null) return;

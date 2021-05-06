@@ -7,6 +7,6 @@ namespace LifePlanner.Models
 {
     interface IVoda
     {
-        public void dodajVodu(Voda voda);
+        public void DodajVodu(Voda voda);
     }
 }

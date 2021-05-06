@@ -7,8 +7,8 @@ namespace LifePlanner.Models
 {
     interface ITask
     {
-        public void dodajTask(Task task);
-        public void obrisiTask(int id);
-        public void urediTask(int id, Task task);
+        public void DodajTask(Task task);
+        public void ObrisiTask(int id);
+        public void UrediTask(int id, Task task);
     }
 }

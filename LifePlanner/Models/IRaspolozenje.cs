@@ -7,6 +7,6 @@ namespace LifePlanner.Models
 {
     interface IRaspolozenje
     {
-        public void dodajRaspolozenje(Raspolozenje raspolozenje);
+        public void DodajRaspolozenje(Raspolozenje raspolozenje);
     }
 }
