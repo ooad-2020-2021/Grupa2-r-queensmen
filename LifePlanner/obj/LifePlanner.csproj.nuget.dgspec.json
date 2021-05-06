@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj": {}
+    "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj": {
+    "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
+        "projectUniqueName": "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
         "projectName": "LifePlanner",
-        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\obj\\",
+        "projectPath": "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
+        "packagesPath": "C:\\Users\\elvir\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elvir\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

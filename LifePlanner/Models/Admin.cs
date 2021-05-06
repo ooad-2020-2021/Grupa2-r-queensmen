@@ -7,11 +7,11 @@ namespace LifePlanner.Models
 {
     public class Admin
     {
-        public int id { get; set; }
-        public string ime { get; set; }
-        public string prezime { get; set; }
-        public string username { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
+        public int Id { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace LifePlanner.Models
 {
     public class Task
     {
-        public int id { get; set; }
-        public string naziv { get; set; }
-        public DateTime datum { get; set; }
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public DateTime Datum { get; set; }
     }
 }

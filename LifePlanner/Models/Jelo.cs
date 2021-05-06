@@ -7,9 +7,9 @@ namespace LifePlanner.Models
 {
     public class Jelo
     {
-        public int id { get; set; }
-        public string naziv { get; set; }
-        public KategorijaJela kategorija { get; set; }
-        public List<string> sastojci { get; set; }
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public KategorijaJela Kategorija { get; set; }
+        public List<string> Sastojci { get; set; }
     }
 }

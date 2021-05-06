@@ -7,8 +7,8 @@ namespace LifePlanner.Models
 {
     public class Raspolozenje
     {
-        public int id { get; set; }
-        public DateTime datum { get; set; }
-        public TipRaspolozenja tipRaspolozenja { get; set; }
+        public int Id { get; set; }
+        public DateTime Datum { get; set; }
+        public TipRaspolozenja TipRaspolozenja { get; set; }
     }
 }

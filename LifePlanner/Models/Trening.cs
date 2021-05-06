@@ -7,8 +7,8 @@ namespace LifePlanner.Models
 {
     public class Trening
     {
-        public int id { get; set; }
-        public string naziv { get; set; }
-        public List<string> vjezbe { get; set; }
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public List<string> Vjezbe { get; set; }
     }
 }
