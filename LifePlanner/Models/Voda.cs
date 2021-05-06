@@ -7,7 +7,7 @@ namespace LifePlanner.Models
 {
     public class Voda
     {
-        public DateTime datum { get; set; }
-        public decimal kolicina { get; set; }
+        public DateTime Datum { get; set; }
+        public decimal Kolicina { get; set; }
     }
 }

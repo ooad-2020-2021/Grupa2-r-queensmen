@@ -7,6 +7,6 @@ namespace LifePlanner.Models
 {
     public class NeregistrovaniKorisnik
     {
-        public int id { get; set; }
+        public int Id { get; set; }
     }
 }

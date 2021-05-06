@@ -46,42 +46,42 @@ namespace LifePlanner.Models
 
         public void obrisiJelo(int id)
         {
-            var jeloZaBrisanje = Jela.SingleOrDefault<Jelo>(j => j.id == id);
+            var jeloZaBrisanje = Jela.SingleOrDefault<Jelo>(j => j.Id == id);
             if (jeloZaBrisanje == null) return;
             Jela.Remove(jeloZaBrisanje);
         }
 
         public void obrisiTask(int id)
         {
-            var taskZaBrisanje = Taskovi.SingleOrDefault<Task>(j => j.id == id);
+            var taskZaBrisanje = Taskovi.SingleOrDefault<Task>(j => j.Id == id);
             if (taskZaBrisanje == null) return;
             Taskovi.Remove(taskZaBrisanje);
         }
 
         public void obrisiTrening(int id)
         {
-            var treningZaBrisanje = Treninzi.SingleOrDefault<Trening>(j => j.id == id);
+            var treningZaBrisanje = Treninzi.SingleOrDefault<Trening>(j => j.Id == id);
             if (treningZaBrisanje == null) return;
             Treninzi.Remove(treningZaBrisanje);
         }
 
         public void urediJelo(int id, Jelo jelo)
         {
-            var jeloZaPromjenu = Jela.SingleOrDefault<Jelo>(j => j.id == id);
+            var jeloZaPromjenu = Jela.SingleOrDefault<Jelo>(j => j.Id == id);
             if (jeloZaPromjenu == null) return;
             jeloZaPromjenu = jelo;
         }
 
         public void urediTask(int id, Task task)
         {
-            var taskZaPromjenu = Taskovi.SingleOrDefault<Task>(t => t.id == id);
+            var taskZaPromjenu = Taskovi.SingleOrDefault<Task>(t => t.Id == id);
             if (taskZaPromjenu == null) return;
             taskZaPromjenu = task;
         }
 
         public void urediTrening(int id, Trening trening)
         {
-            var treningZaPromjenu = Treninzi.SingleOrDefault<Trening>(tr => tr.id == id);
+            var treningZaPromjenu = Treninzi.SingleOrDefault<Trening>(tr => tr.Id == id);
             if (treningZaPromjenu == null) return;
             treningZaPromjenu = trening;
         }
