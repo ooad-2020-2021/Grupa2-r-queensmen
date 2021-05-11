@@ -15,7 +15,7 @@ namespace LifePlanner.Models
         [Required]
         public string Naziv { get; set; }
 
-        public List<string> Vjezbe { get; set; }
+        public IList<string> Vjezbe { get; set; }
 
         [Required]
         public RegistrovaniKorisnik Korisnik { get; set; }

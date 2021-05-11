@@ -183,7 +183,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "3.1.12"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
+          "lib/netstandard2.0/_._": {}
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
@@ -5698,19 +5698,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\elvir\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
+      "projectUniqueName": "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
       "projectName": "LifePlanner",
-      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\obj\\",
+      "projectPath": "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
+      "packagesPath": "C:\\Users\\elvir\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\elvir\\Desktop\\etf 2020_2021\\OOAD\\Grupa2-r-queensmen\\LifePlanner\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\elvir\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5753,6 +5753,8 @@
             "version": "[3.1.12, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
             "version": "[3.1.12, )"
           }

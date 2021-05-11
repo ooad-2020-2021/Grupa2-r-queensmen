@@ -20,7 +20,7 @@ namespace LifePlanner.Models
         [Display(Name = "KategorijaJela: ")]
         public KategorijaJela Kategorija { get; set; }
       
-        public List<string> Sastojci { get; set; }
+        public IList<string> Sastojci { get; set; }
 
         [Required]
         public RegistrovaniKorisnik Korisnik { get; set; }

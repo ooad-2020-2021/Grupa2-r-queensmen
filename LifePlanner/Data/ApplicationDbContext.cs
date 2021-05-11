@@ -37,6 +37,8 @@ namespace LifePlanner.Data
             modelBuilder.Entity<Trening>().Property(nameof(Trening.Vjezbe)).HasConversion(splitStringConverter);
             modelBuilder.Entity<Jelo>().Property(nameof(Jelo.Sastojci)).HasConversion(splitStringConverter);
 
+            modelBuilder.Entity<Voda>().Property(nameof(Voda.Kolicina)).HasColumnType("decimal(2,2)");
+
             modelBuilder.Entity<Admin>().ToTable("Admini");
             modelBuilder.Entity<Jelo>().ToTable("Jela");
             modelBuilder.Entity<NeregistrovaniKorisnik>().ToTable("NeregistrovaniKorisnici");
@@ -45,6 +47,8 @@ namespace LifePlanner.Data
             modelBuilder.Entity<Task>().ToTable("Taskovi");
             modelBuilder.Entity<Trening>().ToTable("Treninzi");
             modelBuilder.Entity<Voda>().ToTable("KolicineVode");
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
