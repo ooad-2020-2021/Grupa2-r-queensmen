@@ -1,6 +1,8 @@
 # Grupa2-r/queensmen
 Tema: Životni planer
 
+![alt slika](https://github.com/ooad-2020-2021/Grupa2-r-queensmen/blob/main/ikona.png?raw=true)
+
 ## Članovi tima:
 1. [Denina Šiljegović](https://github.com/DeninaSiljegovic)
 2. [Omar Sarić](https://github.com/osaric1)
