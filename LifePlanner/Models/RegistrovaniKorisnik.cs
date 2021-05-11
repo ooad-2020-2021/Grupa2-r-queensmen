@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,16 +9,39 @@ namespace LifePlanner.Models
 {
     public class RegistrovaniKorisnik : IVoda, ITask, IJelo, IRaspolozenje, ITrening
     {
+        [Key]
+        [Required]
         public int Id { get; set; }
+
+        [Required]
         public string Ime { get; set; }
+
+        [Required]
         public string Prezime { get; set; }
+
+        [Required]
         public string Username { get; set; }
+
+        [Required]
         public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [NotMapped]
         public List<Task> Taskovi { get; set; }
+
+        [NotMapped]
         public List<Jelo> Jela { get; set; }
+
+        [NotMapped]
         public List<Trening> Treninzi { get; set; }
+
+        [NotMapped]
         public List<Voda> PopijenaVoda { get; set; }
+
+        [NotMapped]
         public List<Raspolozenje> Raspolozenja { get; set; }
 
         public void DodajJelo(Jelo jelo)
