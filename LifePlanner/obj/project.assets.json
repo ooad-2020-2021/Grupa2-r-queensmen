@@ -8842,19 +8842,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\Omar\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
+      "projectUniqueName": "C:\\Users\\Omar\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
       "projectName": "LifePlanner",
-      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Grupa2-r-queensmen\\LifePlanner\\obj\\",
+      "projectPath": "C:\\Users\\Omar\\Grupa2-r-queensmen\\LifePlanner\\LifePlanner.csproj",
+      "packagesPath": "C:\\Users\\Omar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Omar\\Grupa2-r-queensmen\\LifePlanner\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Omar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
