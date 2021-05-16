@@ -44,7 +44,7 @@ namespace LifePlanner.Data
             modelBuilder.Entity<NeregistrovaniKorisnik>().ToTable("NeregistrovaniKorisnici");
             modelBuilder.Entity<Raspolozenje>().ToTable("Raspolozenja");
             modelBuilder.Entity<RegistrovaniKorisnik>().ToTable("RegistrovaniKorisnici");
-            modelBuilder.Entity<Zadatak>().ToTable("Taskovi");
+            modelBuilder.Entity<Zadatak>().ToTable("Zadaci");
             modelBuilder.Entity<Trening>().ToTable("Treninzi");
             modelBuilder.Entity<Voda>().ToTable("KolicineVode");
 
