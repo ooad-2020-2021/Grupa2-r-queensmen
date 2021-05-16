@@ -25,7 +25,7 @@ namespace LifePlanner.Data
 
         public DbSet<RegistrovaniKorisnik> RegistrovaniKorisnici { get; set; }
 
-        public DbSet<Task> Taskovi { get; set; }
+        public DbSet<Zadatak> Taskovi { get; set; }
 
         public DbSet<Trening> Treninzi { get; set; }
 
@@ -44,7 +44,7 @@ namespace LifePlanner.Data
             modelBuilder.Entity<NeregistrovaniKorisnik>().ToTable("NeregistrovaniKorisnici");
             modelBuilder.Entity<Raspolozenje>().ToTable("Raspolozenja");
             modelBuilder.Entity<RegistrovaniKorisnik>().ToTable("RegistrovaniKorisnici");
-            modelBuilder.Entity<Task>().ToTable("Taskovi");
+            modelBuilder.Entity<Zadatak>().ToTable("Taskovi");
             modelBuilder.Entity<Trening>().ToTable("Treninzi");
             modelBuilder.Entity<Voda>().ToTable("KolicineVode");
 

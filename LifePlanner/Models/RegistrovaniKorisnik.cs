@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LifePlanner.Models
 {
-    public class RegistrovaniKorisnik : IVoda, ITask, IJelo, IRaspolozenje, ITrening
+    public class RegistrovaniKorisnik : IVoda, IZadatak, IJelo, IRaspolozenje, ITrening
     {
         [Key]
         [Required]
@@ -30,7 +30,7 @@ namespace LifePlanner.Models
         public string Password { get; set; }
 
         [NotMapped]
-        public List<Task> Taskovi { get; set; }
+        public List<Zadatak> Zadaci { get; set; }
 
         [NotMapped]
         public List<Jelo> Jela { get; set; }
@@ -54,9 +54,9 @@ namespace LifePlanner.Models
             Raspolozenja.Add(raspolozenje);
         }
 
-        public void DodajTask(Task task)
+        public void DodajZadatak(Zadatak task)
         {
-            Taskovi.Add(task);
+            Zadaci.Add(task);
         }
 
         public void DodajTrening(Trening trening)
@@ -76,11 +76,11 @@ namespace LifePlanner.Models
             Jela.Remove(jeloZaBrisanje);
         }
 
-        public void ObrisiTask(int id)
+        public void ObrisiZadatak(int id)
         {
-            var taskZaBrisanje = Taskovi.SingleOrDefault<Task>(j => j.Id == id);
+            var taskZaBrisanje = Zadaci.SingleOrDefault<Zadatak>(j => j.Id == id);
             if (taskZaBrisanje == null) return;
-            Taskovi.Remove(taskZaBrisanje);
+            Zadaci.Remove(taskZaBrisanje);
         }
 
         public void ObrisiTrening(int id)
@@ -97,9 +97,9 @@ namespace LifePlanner.Models
             jeloZaPromjenu = jelo;
         }
 
-        public void UrediTask(int id, Task task)
+        public void UrediZadatak(int id, Zadatak task)
         {
-            var taskZaPromjenu = Taskovi.SingleOrDefault<Task>(t => t.Id == id);
+            var taskZaPromjenu = Zadaci.SingleOrDefault<Zadatak>(t => t.Id == id);
             if (taskZaPromjenu == null) return;
             taskZaPromjenu = task;
         }
