@@ -40,6 +40,12 @@ namespace LifePlanner
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+                //implementujemo nasu logiku provjere duplih emailova 
+                //jer za asp net core email i username su ista stvar
+                //jer u RegisterModel.OnPostAsync 
+                //on kaze: username = Input.Email
+                //implementovacemo nasu logiku unikatnosti emaila u RegisterModel
+                options.User.RequireUniqueEmail = false;
             });
             services.AddControllersWithViews();
             services.AddRazorPages();

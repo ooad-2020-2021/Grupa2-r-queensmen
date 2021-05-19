@@ -87,6 +87,12 @@ namespace LifePlanner.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                var UserSaIstimEmailom = await _userManager.FindByEmailAsync(Input.Email);
+                if (UserSaIstimEmailom != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Korisnik sa tim emailom vec postoji");
+                    return Page();
+                }
                 var user = new RegistrovaniKorisnik { 
                     UserName = Input.UserName, 
                     Email = Input.Email,
