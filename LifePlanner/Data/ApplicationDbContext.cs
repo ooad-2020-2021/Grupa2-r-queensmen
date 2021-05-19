@@ -25,7 +25,7 @@ namespace LifePlanner.Data
 
         public DbSet<RegistrovaniKorisnik> RegistrovaniKorisnici { get; set; }
 
-        public DbSet<Zadatak> Taskovi { get; set; }
+        public DbSet<Zadatak> Zadaci { get; set; }
 
         public DbSet<Trening> Treninzi { get; set; }
 
