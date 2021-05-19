@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LifePlanner.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<RegistrovaniKorisnik>
     {
         private readonly DbContextOptions _options;
 
@@ -34,7 +34,7 @@ namespace LifePlanner.Data
 
         public DbSet<Voda> KolicineVode { get; set; }
 
-        public override DbSet<IdentityUser> Users { get; set; }
+        public override DbSet<RegistrovaniKorisnik> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,7 @@ namespace LifePlanner.Data
             modelBuilder.Entity<Zadatak>().ToTable("Zadaci");
             modelBuilder.Entity<Trening>().ToTable("Treninzi");
             modelBuilder.Entity<Voda>().ToTable("KolicineVode");
+            modelBuilder.Entity<RegistrovaniKorisnik>().ToTable("RegistrovaniKorisnici");
         }
     }
 }
