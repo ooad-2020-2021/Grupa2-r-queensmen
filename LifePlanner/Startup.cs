@@ -43,7 +43,7 @@ namespace LifePlanner
                 //implementujemo nasu logiku provjere duplih emailova 
                 //jer za asp net core email i username su ista stvar
                 //jer u RegisterModel.OnPostAsync 
-                //on kaze: username = Input.Email
+                //on kaze: username = Input.Email (mi smo to vec ispravili)
                 //implementovacemo nasu logiku unikatnosti emaila u RegisterModel
                 options.User.RequireUniqueEmail = false;
             });
