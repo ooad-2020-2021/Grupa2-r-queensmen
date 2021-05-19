@@ -24,6 +24,6 @@ namespace LifePlanner.Models
         public RegistrovaniKorisnik Korisnik { get; set; }
 
         [Required]
-        public int KorisnikID { get; set; }
+        public int KorisnikId { get; set; }
     }
 }

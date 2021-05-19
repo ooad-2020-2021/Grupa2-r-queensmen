@@ -19,14 +19,13 @@ namespace LifePlanner.Controllers
             _context = context;
         }
 
-        // GET: Treninzi
+        // GET: Trening
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Treninzi.Include(t => t.Korisnik);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Treninzi.ToListAsync());
         }
 
-        // GET: Treninzi/Details/5
+        // GET: Trening/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,7 +34,6 @@ namespace LifePlanner.Controllers
             }
 
             var trening = await _context.Treninzi
-                .Include(t => t.Korisnik)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (trening == null)
             {
@@ -45,19 +43,18 @@ namespace LifePlanner.Controllers
             return View(trening);
         }
 
-        // GET: Treninzi/Create
+        // GET: Trening/Create
         public IActionResult Create()
         {
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email");
             return View();
         }
 
-        // POST: Treninzi/Create
+        // POST: Trening/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naziv,Vjezbe,KorisnikID")] Trening trening)
+        public async Task<IActionResult> Create([Bind("Id,Naziv,Vjezbe,KorisnikId")] Trening trening)
         {
             if (ModelState.IsValid)
             {
@@ -65,11 +62,10 @@ namespace LifePlanner.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email", trening.KorisnikID);
             return View(trening);
         }
 
-        // GET: Treninzi/Edit/5
+        // GET: Trening/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,16 +78,15 @@ namespace LifePlanner.Controllers
             {
                 return NotFound();
             }
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email", trening.KorisnikID);
             return View(trening);
         }
 
-        // POST: Treninzi/Edit/5
+        // POST: Trening/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv,Vjezbe,KorisnikID")] Trening trening)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv,Vjezbe,KorisnikId")] Trening trening)
         {
             if (id != trening.Id)
             {
@@ -118,11 +113,10 @@ namespace LifePlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email", trening.KorisnikID);
             return View(trening);
         }
 
-        // GET: Treninzi/Delete/5
+        // GET: Trening/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,7 +125,6 @@ namespace LifePlanner.Controllers
             }
 
             var trening = await _context.Treninzi
-                .Include(t => t.Korisnik)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (trening == null)
             {
@@ -141,7 +134,7 @@ namespace LifePlanner.Controllers
             return View(trening);
         }
 
-        // POST: Treninzi/Delete/5
+        // POST: Trening/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -1,4 +1,5 @@
 ﻿using LifePlanner.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -8,14 +9,16 @@ using System.Text;
 
 namespace LifePlanner.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        private readonly DbContextOptions _options;
+
+
+        public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
+            _options = options;
         }
-
-        public DbSet<Admin> Admini { get; set; }
 
         public DbSet<Jelo> Jela { get; set; }
 
@@ -23,7 +26,7 @@ namespace LifePlanner.Data
 
         public DbSet<Raspolozenje> Raspolozenja { get; set; }
 
-        public DbSet<RegistrovaniKorisnik> RegistrovaniKorisnici { get; set; }
+        //public DbSet<RegistrovaniKorisnik> RegistrovaniKorisnici { get; set; }
 
         public DbSet<Zadatak> Zadaci { get; set; }
 
@@ -31,24 +34,25 @@ namespace LifePlanner.Data
 
         public DbSet<Voda> KolicineVode { get; set; }
 
+        public override DbSet<IdentityUser> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             var splitStringConverter = new ValueConverter<IList<String>, String>(v => String.Join("@", v), v => v.Split(new[] { '@' }));
             modelBuilder.Entity<Trening>().Property(nameof(Trening.Vjezbe)).HasConversion(splitStringConverter);
             modelBuilder.Entity<Jelo>().Property(nameof(Jelo.Sastojci)).HasConversion(splitStringConverter);
 
             modelBuilder.Entity<Voda>().Property(nameof(Voda.Kolicina)).HasColumnType("decimal(2,2)");
 
-            modelBuilder.Entity<Admin>().ToTable("Admini");
+
             modelBuilder.Entity<Jelo>().ToTable("Jela");
             modelBuilder.Entity<NeregistrovaniKorisnik>().ToTable("NeregistrovaniKorisnici");
             modelBuilder.Entity<Raspolozenje>().ToTable("Raspolozenja");
-            modelBuilder.Entity<RegistrovaniKorisnik>().ToTable("RegistrovaniKorisnici");
             modelBuilder.Entity<Zadatak>().ToTable("Zadaci");
             modelBuilder.Entity<Trening>().ToTable("Treninzi");
             modelBuilder.Entity<Voda>().ToTable("KolicineVode");
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

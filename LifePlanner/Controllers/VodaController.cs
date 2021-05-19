@@ -22,8 +22,7 @@ namespace LifePlanner.Controllers
         // GET: Voda
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.KolicineVode.Include(v => v.Korisnik);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.KolicineVode.ToListAsync());
         }
 
         // GET: Voda/Details/5
@@ -35,7 +34,6 @@ namespace LifePlanner.Controllers
             }
 
             var voda = await _context.KolicineVode
-                .Include(v => v.Korisnik)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (voda == null)
             {
@@ -48,7 +46,6 @@ namespace LifePlanner.Controllers
         // GET: Voda/Create
         public IActionResult Create()
         {
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace LifePlanner.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Datum,Kolicina,KorisnikID")] Voda voda)
+        public async Task<IActionResult> Create([Bind("Id,Datum,Kolicina,KorisnikId")] Voda voda)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +62,6 @@ namespace LifePlanner.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email", voda.KorisnikID);
             return View(voda);
         }
 
@@ -82,7 +78,6 @@ namespace LifePlanner.Controllers
             {
                 return NotFound();
             }
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email", voda.KorisnikID);
             return View(voda);
         }
 
@@ -91,7 +86,7 @@ namespace LifePlanner.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Datum,Kolicina,KorisnikID")] Voda voda)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Datum,Kolicina,KorisnikId")] Voda voda)
         {
             if (id != voda.Id)
             {
@@ -118,7 +113,6 @@ namespace LifePlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KorisnikID"] = new SelectList(_context.RegistrovaniKorisnici, "Id", "Email", voda.KorisnikID);
             return View(voda);
         }
 
@@ -131,7 +125,6 @@ namespace LifePlanner.Controllers
             }
 
             var voda = await _context.KolicineVode
-                .Include(v => v.Korisnik)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (voda == null)
             {
