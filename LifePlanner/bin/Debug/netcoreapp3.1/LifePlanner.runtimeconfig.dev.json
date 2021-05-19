@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\elvir\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\elvir\\.nuget\\packages"
-    ]
-  }
-}
