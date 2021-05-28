@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LifePlanner.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,8 +25,7 @@ namespace LifePlanner.Migrations
                 name: "NeregistrovaniKorisnici",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                    Id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -170,13 +169,12 @@ namespace LifePlanner.Migrations
                 name: "Jela",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Naziv = table.Column<string>(nullable: false),
                     Kategorija = table.Column<int>(nullable: false),
                     Sastojci = table.Column<string>(nullable: true),
                     KorisnikId1 = table.Column<string>(nullable: false),
-                    KorisnikId = table.Column<int>(nullable: false)
+                    KorisnikId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,12 +191,11 @@ namespace LifePlanner.Migrations
                 name: "KolicineVode",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Datum = table.Column<DateTime>(nullable: false),
                     Kolicina = table.Column<decimal>(type: "decimal(2,2)", nullable: false),
                     KorisnikId1 = table.Column<string>(nullable: false),
-                    KorisnikId = table.Column<int>(nullable: false)
+                    KorisnikId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,12 +212,11 @@ namespace LifePlanner.Migrations
                 name: "Raspolozenja",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Datum = table.Column<DateTime>(nullable: false),
                     TipRaspolozenja = table.Column<int>(nullable: false),
                     KorisnikId1 = table.Column<string>(nullable: false),
-                    KorisnikId = table.Column<int>(nullable: false)
+                    KorisnikId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -237,12 +233,11 @@ namespace LifePlanner.Migrations
                 name: "Treninzi",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Naziv = table.Column<string>(nullable: false),
                     Vjezbe = table.Column<string>(nullable: true),
                     KorisnikId1 = table.Column<string>(nullable: false),
-                    KorisnikId = table.Column<int>(nullable: false)
+                    KorisnikId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -259,12 +254,11 @@ namespace LifePlanner.Migrations
                 name: "Zadaci",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Naziv = table.Column<string>(nullable: false),
                     Datum = table.Column<DateTime>(nullable: false),
                     KorisnikId1 = table.Column<string>(nullable: false),
-                    KorisnikId = table.Column<int>(nullable: false)
+                    KorisnikId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {

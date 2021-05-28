@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LifePlanner.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210519093057_Initial2")]
-    partial class Initial2
+    [Migration("20210528214401_suvisanFK")]
+    partial class suvisanFK
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,19 +23,14 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.Jelo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Kategorija")
                         .HasColumnType("int");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KorisnikId1")
-                        .IsRequired()
+                    b.Property<string>("KorisnikId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naziv")
@@ -47,17 +42,16 @@ namespace LifePlanner.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KorisnikId1");
+                    b.HasIndex("KorisnikId");
 
                     b.ToTable("Jela");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.NeregistrovaniKorisnik", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -66,19 +60,14 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.Raspolozenje", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KorisnikId1")
-                        .IsRequired()
+                    b.Property<string>("KorisnikId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("TipRaspolozenja")
@@ -86,23 +75,91 @@ namespace LifePlanner.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KorisnikId1");
+                    b.HasIndex("KorisnikId");
 
                     b.ToTable("Raspolozenja");
                 });
 
-            modelBuilder.Entity("LifePlanner.Models.Trening", b =>
+            modelBuilder.Entity("LifePlanner.Models.RegistrovaniKorisnik", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("KorisnikId")
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("KorisnikId1")
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Ime")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Prezime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("RegistrovaniKorisnici");
+                });
+
+            modelBuilder.Entity("LifePlanner.Models.Trening", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("KorisnikId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naziv")
@@ -114,17 +171,16 @@ namespace LifePlanner.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KorisnikId1");
+                    b.HasIndex("KorisnikId");
 
                     b.ToTable("Treninzi");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Voda", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
@@ -132,35 +188,26 @@ namespace LifePlanner.Migrations
                     b.Property<decimal>("Kolicina")
                         .HasColumnType("decimal(2,2)");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KorisnikId1")
-                        .IsRequired()
+                    b.Property<string>("KorisnikId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KorisnikId1");
+                    b.HasIndex("KorisnikId");
 
                     b.ToTable("KolicineVode");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Zadatak", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KorisnikId1")
-                        .IsRequired()
+                    b.Property<string>("KorisnikId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naziv")
@@ -169,7 +216,7 @@ namespace LifePlanner.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KorisnikId1");
+                    b.HasIndex("KorisnikId");
 
                     b.ToTable("Zadaci");
                 });
@@ -223,77 +270,6 @@ namespace LifePlanner.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -380,64 +356,39 @@ namespace LifePlanner.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LifePlanner.Models.RegistrovaniKorisnik", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Ime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Prezime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("RegistrovaniKorisnik");
-                });
-
             modelBuilder.Entity("LifePlanner.Models.Jelo", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Raspolozenje", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Trening", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Voda", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Zadatak", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -451,7 +402,7 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -460,7 +411,7 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -475,7 +426,7 @@ namespace LifePlanner.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -484,7 +435,7 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

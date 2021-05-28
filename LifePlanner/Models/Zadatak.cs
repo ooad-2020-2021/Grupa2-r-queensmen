@@ -10,7 +10,7 @@ namespace LifePlanner.Models
     {
         [Key]
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public string Naziv { get; set; }
@@ -20,10 +20,6 @@ namespace LifePlanner.Models
         [Display(Name = "Datum: ")]
         public DateTime Datum { get; set; }
 
-        [Required]
         public RegistrovaniKorisnik Korisnik { get; set; }
-
-        [Required]
-        public int KorisnikId { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace LifePlanner.Models
     interface IZadatak
     {
         public void DodajZadatak(Zadatak task);
-        public void ObrisiZadatak(int id);
-        public void UrediZadatak(int id, Zadatak task);
+        public void ObrisiZadatak(Guid id);
+        public void UrediZadatak(Guid id, Zadatak task);
     }
 }

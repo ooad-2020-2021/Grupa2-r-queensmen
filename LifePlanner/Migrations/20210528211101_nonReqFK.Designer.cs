@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LifePlanner.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210519094917_Registracija")]
-    partial class Registracija
+    [Migration("20210528211101_nonReqFK")]
+    partial class nonReqFK
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,19 +23,17 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.Jelo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Kategorija")
                         .HasColumnType("int");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("KorisnikId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("KorisnikId1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naziv")
@@ -54,10 +52,9 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.NeregistrovaniKorisnik", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -66,19 +63,17 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.Raspolozenje", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("KorisnikId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("KorisnikId1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("TipRaspolozenja")
@@ -166,16 +161,14 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.Trening", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("KorisnikId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("KorisnikId1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naziv")
@@ -194,10 +187,9 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.Voda", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
@@ -205,11 +197,10 @@ namespace LifePlanner.Migrations
                     b.Property<decimal>("Kolicina")
                         .HasColumnType("decimal(2,2)");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("KorisnikId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("KorisnikId1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -221,19 +212,17 @@ namespace LifePlanner.Migrations
 
             modelBuilder.Entity("LifePlanner.Models.Zadatak", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("KorisnikId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("KorisnikId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("KorisnikId1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naziv")
@@ -386,45 +375,35 @@ namespace LifePlanner.Migrations
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId1");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Raspolozenje", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId1");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Trening", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId1");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Voda", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId1");
                 });
 
             modelBuilder.Entity("LifePlanner.Models.Zadatak", b =>
                 {
                     b.HasOne("LifePlanner.Models.RegistrovaniKorisnik", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("KorisnikId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KorisnikId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

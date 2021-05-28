@@ -61,42 +61,42 @@ namespace LifePlanner.Models
             PopijenaVoda.Add(voda);
         }
 
-        public void ObrisiJelo(int id)
+        public void ObrisiJelo(Guid id)
         {
             var jeloZaBrisanje = Jela.SingleOrDefault<Jelo>(j => j.Id == id);
             if (jeloZaBrisanje == null) return;
             Jela.Remove(jeloZaBrisanje);
         }
 
-        public void ObrisiZadatak(int id)
+        public void ObrisiZadatak(Guid id)
         {
             var taskZaBrisanje = Zadaci.SingleOrDefault<Zadatak>(j => j.Id == id);
             if (taskZaBrisanje == null) return;
             Zadaci.Remove(taskZaBrisanje);
         }
 
-        public void ObrisiTrening(int id)
+        public void ObrisiTrening(Guid id)
         {
             var treningZaBrisanje = Treninzi.SingleOrDefault<Trening>(j => j.Id == id);
             if (treningZaBrisanje == null) return;
             Treninzi.Remove(treningZaBrisanje);
         }
 
-        public void UrediJelo(int id, Jelo jelo)
+        public void UrediJelo(Guid id, Jelo jelo)
         {
             var jeloZaPromjenu = Jela.SingleOrDefault<Jelo>(j => j.Id == id);
             if (jeloZaPromjenu == null) return;
             jeloZaPromjenu = jelo;
         }
 
-        public void UrediZadatak(int id, Zadatak task)
+        public void UrediZadatak(Guid id, Zadatak task)
         {
             var taskZaPromjenu = Zadaci.SingleOrDefault<Zadatak>(t => t.Id == id);
             if (taskZaPromjenu == null) return;
             taskZaPromjenu = task;
         }
 
-        public void UrediTrening(int id, Trening trening)
+        public void UrediTrening(Guid id, Trening trening)
         {
             var treningZaPromjenu = Treninzi.SingleOrDefault<Trening>(tr => tr.Id == id);
             if (treningZaPromjenu == null) return;

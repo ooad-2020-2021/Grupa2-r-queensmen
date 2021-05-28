@@ -10,7 +10,7 @@ namespace LifePlanner.Models
     {
         [Key]
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [DataType(DataType.Date)]
         [Required]
@@ -22,10 +22,6 @@ namespace LifePlanner.Models
         [Display(Name = "Raspolozenje: ")]
         public TipRaspolozenja TipRaspolozenja { get; set; }
 
-        [Required]
         public RegistrovaniKorisnik Korisnik { get; set; }
-
-        [Required]
-        public int KorisnikId { get; set; }
     }
 }

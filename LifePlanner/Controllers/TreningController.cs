@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LifePlanner.Data;
 using LifePlanner.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace LifePlanner.Controllers
+namespace LifePlanner
 {
     public class TreningController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<RegistrovaniKorisnik> _userManager;
 
-        public TreningController(ApplicationDbContext context)
+        public TreningController(ApplicationDbContext context, UserManager<RegistrovaniKorisnik> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Trening
@@ -26,7 +29,7 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Trening/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -54,10 +57,13 @@ namespace LifePlanner.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naziv,Vjezbe,KorisnikId")] Trening trening)
+        public async Task<IActionResult> Create([Bind("Id,Naziv,Vjezbe")] Trening trening)
         {
             if (ModelState.IsValid)
             {
+                trening.Id = Guid.NewGuid();
+                RegistrovaniKorisnik trenutni = await _userManager.GetUserAsync(HttpContext.User);
+                trening.Korisnik = trenutni;
                 _context.Add(trening);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,7 +72,7 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Trening/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -86,7 +92,7 @@ namespace LifePlanner.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv,Vjezbe,KorisnikId")] Trening trening)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Naziv,Vjezbe")] Trening trening)
         {
             if (id != trening.Id)
             {
@@ -117,7 +123,7 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Trening/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -137,7 +143,7 @@ namespace LifePlanner.Controllers
         // POST: Trening/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var trening = await _context.Treninzi.FindAsync(id);
             _context.Treninzi.Remove(trening);
@@ -145,7 +151,7 @@ namespace LifePlanner.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TreningExists(int id)
+        private bool TreningExists(Guid id)
         {
             return _context.Treninzi.Any(e => e.Id == id);
         }

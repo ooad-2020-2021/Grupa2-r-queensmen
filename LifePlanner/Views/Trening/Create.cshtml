@@ -17,16 +17,12 @@
                 <input asp-for="Naziv" class="form-control" />
                 <span asp-validation-for="Naziv" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Vjezbe" class="control-label"></label>
-                <input asp-for="Vjezbe" class="form-control" />
-                <span asp-validation-for="Vjezbe" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KorisnikId" class="control-label"></label>
-                <input asp-for="KorisnikId" class="form-control" />
-                <span asp-validation-for="KorisnikId" class="text-danger"></span>
-            </div>
+            <button onclick="addRow()" type="button">Dodaj red</button>
+            <table id="VjezbeTabela">
+                <tr>
+                    <th></th>
+                </tr>
+            </table>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -40,4 +36,14 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        var counter = 0;
+        function addRow() {
+            var table = document.getElementById("VjezbeTabela");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML = '<input type="text" name="Vjezbe[' + counter + ']"/>';
+            counter++;
+        }
+    </script>
 }

@@ -10,17 +10,13 @@ namespace LifePlanner.Models
     {
         [Key]
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public string Naziv { get; set; }
 
         public IList<string> Vjezbe { get; set; }
 
-        [Required]
         public RegistrovaniKorisnik Korisnik { get; set; }
-
-        [Required]
-        public int KorisnikId { get; set; }
     }
 }
