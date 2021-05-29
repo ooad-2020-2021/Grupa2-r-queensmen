@@ -23,12 +23,14 @@
             <table id="VjezbeTabela">
                 <tr>
                     <th></th>
-                </tr>
+                </tr> 
                 @for (int i = 0; i < Model.Vjezbe.Count; i++)
                 {
                     @:<tr>
                         @:<input type="text" name="Vjezbe[@i]" value="@Model.Vjezbe[i]"/>
-                    @:</tr></br>
+                        @:<input type="button" id="Vjezbe[@i]" onclick="obrisi(this)" value="Obrisi" /">
+                    @:</tr>
+                    <br>
                 }
             </table>
             <div class="form-group">
@@ -44,15 +46,34 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
+<script>
         var counter = @Model.Vjezbe.Count;
         function addRow() {
-            debugger;
             var table = document.getElementById("VjezbeTabela");
             var row = table.insertRow(-1);
             var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
             cell1.innerHTML = '<input type="text" name="Vjezbe[' + counter + ']"/>';
+            cell2.innerHTML = '<input type="button" id="Vjezbe[' + counter + ']" onclick="obrisi(this)" value="Obrisi" /">'
             counter++;
         }
-    </script>
+
+        function obrisi(el) {
+            let inputZaBrisanje;
+            var allInputs = document.getElementsByTagName("input");
+            for (var x = 0; x < allInputs.length; x++)
+                if (allInputs[x].name == el.id) {
+                    inputZaBrisanje = allInputs[x];
+                    break;
+                }
+            inputZaBrisanje.value = "";
+            inputZaBrisanje.style.visibility = "hidden";
+            el.style.visibility = "hidden";
+            return false;
+        }
+
+        $(document).ready(() => {
+
+        })
+</script>
 }

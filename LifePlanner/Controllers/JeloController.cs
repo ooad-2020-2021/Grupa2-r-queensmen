@@ -7,98 +7,89 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LifePlanner.Data;
 using LifePlanner.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace LifePlanner.Controllers
 {
-    public class TreningController : Controller
+    public class JeloController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<RegistrovaniKorisnik> _userManager;
 
-        public TreningController(ApplicationDbContext context, UserManager<RegistrovaniKorisnik> userManager)
+        public JeloController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        // GET: Trening
+        // GET: Jelo
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Treninzi.ToListAsync());
+            return View(await _context.Jela.ToListAsync());
         }
 
-        // GET: Trening/Details/5
-        [ActionName("Details")]
-        public async Task<IActionResult> Index(Guid? id)
+        // GET: Jelo/Details/5
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var trening = await _context.Treninzi
+            var jelo = await _context.Jela
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (trening == null)
+            if (jelo == null)
             {
                 return NotFound();
             }
 
-            return View(trening);
+            return View(jelo);
         }
 
-        // GET: Trening/Create
-        [ActionName("Create")]
-        public IActionResult DodajTrening()
+        // GET: Jelo/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Trening/Create
+        // POST: Jelo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Create")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DodajTrening([Bind("Id,Naziv,Vjezbe")] Trening trening)
+        public async Task<IActionResult> Create([Bind("Id,Naziv,Kategorija,Sastojci")] Jelo jelo)
         {
             if (ModelState.IsValid)
             {
-                trening.Id = Guid.NewGuid();
-                RegistrovaniKorisnik trenutni = await _userManager.GetUserAsync(HttpContext.User);
-                trening.Korisnik = trenutni;
-                trening.Vjezbe = trening.Vjezbe.Where(v => v != null).ToList();
-                _context.Add(trening);
+                jelo.Id = Guid.NewGuid();
+                _context.Add(jelo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(trening);
+            return View(jelo);
         }
 
-        // GET: Trening/Edit/5
-        [ActionName("Edit")]
-        public async Task<IActionResult> UrediTrening(Guid? id)
+        // GET: Jelo/Edit/5
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var trening = await _context.Treninzi.FindAsync(id);
-            if (trening == null)
+            var jelo = await _context.Jela.FindAsync(id);
+            if (jelo == null)
             {
                 return NotFound();
             }
-            return View(trening);
+            return View(jelo);
         }
 
-        // POST: Trening/Edit/5
+        // POST: Jelo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UrediTrening(Guid id, [Bind("Id,Naziv,Vjezbe")] Trening trening)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Naziv,Kategorija,Sastojci")] Jelo jelo)
         {
-            if (id != trening.Id)
+            if (id != jelo.Id)
             {
                 return NotFound();
             }
@@ -107,13 +98,12 @@ namespace LifePlanner.Controllers
             {
                 try
                 {
-                    trening.Vjezbe = trening.Vjezbe.Where(v => v != null).ToList();
-                    _context.Update(trening);
+                    _context.Update(jelo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TreningExists(trening.Id))
+                    if (!JeloExists(jelo.Id))
                     {
                         return NotFound();
                     }
@@ -124,42 +114,41 @@ namespace LifePlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(trening);
+            return View(jelo);
         }
 
-        // GET: Trening/Delete/5
-        [ActionName("Delete")]
-        public async Task<IActionResult> ObrisiTrening(Guid? id)
+        // GET: Jelo/Delete/5
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var trening = await _context.Treninzi
+            var jelo = await _context.Jela
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (trening == null)
+            if (jelo == null)
             {
                 return NotFound();
             }
 
-            return View(trening);
+            return View(jelo);
         }
 
-        // POST: Trening/Delete/5
+        // POST: Jelo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ObrisiTrening(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var trening = await _context.Treninzi.FindAsync(id);
-            _context.Treninzi.Remove(trening);
+            var jelo = await _context.Jela.FindAsync(id);
+            _context.Jela.Remove(jelo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TreningExists(Guid id)
+        private bool JeloExists(Guid id)
         {
-            return _context.Treninzi.Any(e => e.Id == id);
+            return _context.Jela.Any(e => e.Id == id);
         }
     }
 }
