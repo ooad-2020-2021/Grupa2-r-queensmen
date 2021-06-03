@@ -25,7 +25,12 @@ namespace LifePlanner.Controllers
         // GET: Trening
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Treninzi.ToListAsync());
+            var kor = await _userManager.GetUserAsync(User);
+            string id = kor.Id;
+            IEnumerable<Trening> treninziOdKorisnika = await _context.Treninzi.Where(
+                t => id == t.Korisnik.Id
+            ).ToListAsync();
+            return View(treninziOdKorisnika);
         }
 
         // GET: Trening/Details/5
