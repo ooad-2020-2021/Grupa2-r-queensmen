@@ -16,7 +16,7 @@ namespace LifePlanner.Models
         public string Naziv { get; set; }
 
         [EnumDataType(typeof(KategorijaJela))]
-        [Required]
+     
         [Display(Name = "KategorijaJela: ")]
         public KategorijaJela Kategorija { get; set; }
       

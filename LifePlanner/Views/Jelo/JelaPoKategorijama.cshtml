@@ -1,0 +1,47 @@
+﻿
+@model IEnumerable<LifePlanner.Models.Jelo>
+
+@{
+    ViewData["Title"] = "JelaPoKategorijama";
+}
+
+
+<h1>JelaPoKategorijama</h1>
+
+<table style="width:100%">
+    <tr>
+        <th>Dorucak</th>
+        <th>Rucak</th>
+        <th>Vecera</th>
+    </tr>
+    @foreach (var item in Model) { 
+        <tr>
+            <td>
+                @if (item.Kategorija == KategorijaJela.Dorucak)
+                {
+                    @Html.DisplayFor(i => item.Naziv)
+                }
+            </td>
+            <td>
+                @if (item.Kategorija == KategorijaJela.Rucak)
+                {
+                    @Html.DisplayFor(i => item.Naziv)
+                }
+            </td>
+            <td>
+                @if (item.Kategorija == KategorijaJela.Vecera)
+                {
+                    @Html.DisplayFor(i => item.Naziv)
+                }
+            </td>
+        </tr>
+    }
+<tr>
+    <td><a asp-controller="Home" asp-action="Index"><input type="button" value="Dodaj jelo"></a></td>
+
+    <td><a asp-controller="Home" asp-action="Index"><input type="button" value="Dodaj jelo"></a></td>
+
+    <td><a asp-controller="Home" asp-action="Index"><input type="button" value="Dodaj jelo"></a></td>
+
+</tr>
+</table> 

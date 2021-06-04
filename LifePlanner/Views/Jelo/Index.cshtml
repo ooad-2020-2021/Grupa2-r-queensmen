@@ -14,10 +14,7 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Naziv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kategorija)
-            </th>
+            </th>        
             <th>
                 @Html.DisplayNameFor(model => model.Sastojci)
             </th>
@@ -29,12 +26,16 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Naziv)
-            </td>
+            </td>           
             <td>
-                @Html.DisplayFor(modelItem => item.Kategorija)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sastojci)
+                <table>
+                    @for (int i = 0; i < item.Sastojci.Count; i++)
+                    {
+                        @:<tr>
+                            @item.Sastojci[i]
+                        @:</tr></br>
+                    }
+                </table>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

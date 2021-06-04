@@ -17,16 +17,12 @@
                 <input asp-for="Naziv" class="form-control" />
                 <span asp-validation-for="Naziv" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Kategorija" class="control-label"></label>
-                <select asp-for="Kategorija" class="form-control"></select>
-                <span asp-validation-for="Kategorija" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sastojci" class="control-label"></label>
-                <input asp-for="Sastojci" class="form-control" />
-                <span asp-validation-for="Sastojci" class="text-danger"></span>
-            </div>
+        <button onclick="addRow()" type="button">Dodaj red</button>
+            <table id="SastojciTabela">
+                <tr>
+                    <th></th>
+                </tr>
+            </table>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -39,5 +35,32 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+        <script>
+            var counter = 0;
+            function addRow() {
+                var table = document.getElementById("SastojciTabela");
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = '<input type="text" name="Sastojci[' + counter + ']"/>';
+                cell2.innerHTML = '<input type="button" id="Sastojci[' + counter + ']" onclick="obrisi(this)" value="Obrisi" /">'
+                counter++;
+            }
+
+            function obrisi(el) {
+                let inputZaBrisanje;
+                var allInputs = document.getElementsByTagName("input");
+                for (var x = 0; x < allInputs.length; x++)
+                    if (allInputs[x].name == el.id) {
+                        inputZaBrisanje = allInputs[x];
+                        break;
+                    }
+                inputZaBrisanje.value = "";
+                inputZaBrisanje.style.visibility = "hidden";
+                el.style.visibility = "hidden";
+                return false;
+            }
+        </script>
 }

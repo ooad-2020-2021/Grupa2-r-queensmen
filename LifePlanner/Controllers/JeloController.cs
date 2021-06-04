@@ -7,26 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LifePlanner.Data;
 using LifePlanner.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace LifePlanner.Controllers
 {
     public class JeloController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<RegistrovaniKorisnik> _userManager;
 
-        public JeloController(ApplicationDbContext context)
+        public JeloController(ApplicationDbContext context, UserManager<RegistrovaniKorisnik> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Jelo
-        public async Task<IActionResult> Index()
+        [ActionName("Index")]
+        public async Task<IActionResult> IndexSvaJela()
         {
-            return View(await _context.Jela.ToListAsync());
+            var kor = await _userManager.GetUserAsync(User);
+            string id = kor.Id;
+            IEnumerable<Jelo> jelaOdKorisnika = await _context.Jela.Where(
+                j => id == j.Korisnik.Id
+            ).ToListAsync();
+
+            return View(jelaOdKorisnika);
         }
 
         // GET: Jelo/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        [ActionName("Details")]
+        public async Task<IActionResult> Index(Guid? id)
         {
             if (id == null)
             {
@@ -44,7 +55,8 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Jelo/Create
-        public IActionResult Create()
+        [ActionName("Create")]
+        public IActionResult DodajJelo()
         {
             return View();
         }
@@ -52,13 +64,18 @@ namespace LifePlanner.Controllers
         // POST: Jelo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naziv,Kategorija,Sastojci")] Jelo jelo)
+        public async Task<IActionResult> DodajJelo([Bind("Id,Naziv,Sastojci")] Jelo jelo)
         {
             if (ModelState.IsValid)
             {
                 jelo.Id = Guid.NewGuid();
+                
+                RegistrovaniKorisnik trenutni = await _userManager.GetUserAsync(User);
+                jelo.Korisnik = trenutni;
+                jelo.Sastojci = jelo.Sastojci.Where(s => s != null).ToList();
+
                 _context.Add(jelo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -67,7 +84,8 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Jelo/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        [ActionName("Edit")]
+        public async Task<IActionResult> UrediJelo(Guid? id)
         {
             if (id == null)
             {
@@ -85,9 +103,9 @@ namespace LifePlanner.Controllers
         // POST: Jelo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Naziv,Kategorija,Sastojci")] Jelo jelo)
+        public async Task<IActionResult> UrediJelo(Guid id, [Bind("Id,Naziv,Sastojci")] Jelo jelo)
         {
             if (id != jelo.Id)
             {
@@ -98,6 +116,7 @@ namespace LifePlanner.Controllers
             {
                 try
                 {
+                    jelo.Sastojci = jelo.Sastojci.Where(s => s != null).ToList();
                     _context.Update(jelo);
                     await _context.SaveChangesAsync();
                 }
@@ -118,7 +137,8 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Jelo/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        [ActionName("Delete")]
+        public async Task<IActionResult> ObrisiJelo(Guid? id)
         {
             if (id == null)
             {
@@ -138,7 +158,7 @@ namespace LifePlanner.Controllers
         // POST: Jelo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> ObrisiJelo(Guid id)
         {
             var jelo = await _context.Jela.FindAsync(id);
             _context.Jela.Remove(jelo);
@@ -149,6 +169,19 @@ namespace LifePlanner.Controllers
         private bool JeloExists(Guid id)
         {
             return _context.Jela.Any(e => e.Id == id);
+        }
+
+        [ActionName("SvaJela")]
+        public async Task<IActionResult> Index()
+        {
+            //TODO: dati jela samo od logovanog korisnika
+            return View("JelaPoKategorijama", await _context.Jela.ToListAsync());
+        }
+
+        public async Task<IActionResult> dodajJeloUKategoriju(int kategorija)
+        {
+            //TODO: dati jela samo od logovanog korisnika
+            return View("DodajJeloUKategoriju", await _context.Jela.ToListAsync());
         }
     }
 }
