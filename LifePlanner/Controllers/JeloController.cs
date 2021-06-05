@@ -174,14 +174,16 @@ namespace LifePlanner.Controllers
         [ActionName("SvaJela")]
         public async Task<IActionResult> Index()
         {
-            //TODO: dati jela samo od logovanog korisnika
-            return View("JelaPoKategorijama", await _context.Jela.ToListAsync());
+            var korisnik = await _userManager.GetUserAsync(User);
+            IEnumerable<Jelo> jelaKorisnika = await _context.Jela.Where(j => j.Korisnik.Id == korisnik.Id).ToListAsync();
+            return View("JelaPoKategorijama", jelaKorisnika);
         }
 
         public async Task<IActionResult> dodajJeloUKategoriju(int kategorija)
         {
-            //TODO: dati jela samo od logovanog korisnika
-            return View("DodajJeloUKategoriju", await _context.Jela.ToListAsync());
+            var korisnik = await _userManager.GetUserAsync(User);
+            IEnumerable<Jelo> jelaKorisnika = await _context.Jela.Where(j => j.Korisnik.Id == korisnik.Id).ToListAsync();
+            return View("DodajJeloUKategoriju", jelaKorisnika);
         }
     }
 }
