@@ -3,6 +3,18 @@
 
 @{
     ViewData["Title"] = "JelaPoKategorijama";
+    var dorucak = new Dictionary<string, string>
+        {
+           { "kategorija", "Dorucak" }          
+        };
+    var rucak = new Dictionary<string, string>
+        {
+           { "kategorija", "Rucak" }
+        };
+    var vecera = new Dictionary<string, string>
+        {
+           { "kategorija", "Vecera" }
+        };
 }
 
 @section Styles {
@@ -22,7 +34,7 @@
                 @: <div class="@item.Naziv">@item.Naziv</div>
             }
         }
-        <a asp-controller="Home" asp-action="Index"><input type="button" value="Dodaj jelo"></a>
+        <a asp-controller="Jelo" asp-action="DodajUKategoriju" asp-all-route-data="dorucak"><input type="button" value="Dodaj jelo"></a>
     </div>
     <div id="rucak" class="kategorija">
         <h2>Rucak</h2>
@@ -33,7 +45,7 @@
                 @: <div class="@item.Naziv">@item.Naziv</div>
             }
         }
-        <a asp-controller="Home" asp-action="Index"><input type="button" value="Dodaj jelo"></a>
+        <a asp-controller="Jelo" asp-action="DodajUKategoriju" asp-all-route-data="rucak"><input type="button" value="Dodaj jelo"></a>
     </div>
     <div id="Vecera" class="kategorija">
         <h2>Vecera</h2>
@@ -44,7 +56,7 @@
                 @: <div class="@item.Naziv">@item.Naziv</div>
             }
         }
-        <a asp-controller="Home" asp-action="Index"><input type="button" value="Dodaj jelo"></a>
+        <a asp-controller="Jelo" asp-action="DodajUKategoriju" asp-all-route-data="vecera"><input type="button" value="Dodaj jelo"></a>
     </div>
 </div>
 <a asp-controller="Jelo" asp-action="SvaJela"><input type="button" value="Sva jela"></a>
