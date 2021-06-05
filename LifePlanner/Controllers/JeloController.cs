@@ -104,7 +104,7 @@ namespace LifePlanner.Controllers
 
                 _context.Add(jelo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("SvaJela");
             }
             return View(jelo);
         }
@@ -157,7 +157,7 @@ namespace LifePlanner.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("SvaJela");
             }
             return View(jelo);
         }
@@ -189,7 +189,7 @@ namespace LifePlanner.Controllers
             var jelo = await _context.Jela.FindAsync(id);
             _context.Jela.Remove(jelo);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("SvaJela");
         }
 
         private bool JeloExists(Guid id)
