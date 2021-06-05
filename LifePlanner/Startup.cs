@@ -47,7 +47,7 @@ namespace LifePlanner
                 //implementovacemo nasu logiku unikatnosti emaila u RegisterModel
                 options.User.RequireUniqueEmail = false;
             });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
 
