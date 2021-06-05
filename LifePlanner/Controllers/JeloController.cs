@@ -30,11 +30,22 @@ namespace LifePlanner.Controllers
             return View("JelaPoKategorijama", jelaKorisnika);
         }
 
-        public async Task<IActionResult> dodajJeloUKategoriju(int kategorija)
+        [HttpPost, ActionName("DodajUKategoriju")]
+        [ValidateAntiForgeryToken]
+        //moglo je sa id atributom
+        public async Task<IActionResult> dodajJeloUKategoriju(int kategorija, Guid idJela)
         {
-            var korisnik = await _userManager.GetUserAsync(User);
-            IEnumerable<Jelo> jelaKorisnika = await _context.Jela.Where(j => j.Korisnik.Id == korisnik.Id).ToListAsync();
-            return View("DodajJeloUKategoriju", jelaKorisnika);
+            KategorijaJela _kategorija = (KategorijaJela)kategorija;
+            Jelo jelo = await _context.Jela.SingleOrDefaultAsync
+                (j => j.Id == idJela);
+            if(jelo == null)
+            {
+                return RedirectToAction("Index");
+            }
+            jelo.Kategorija = _kategorija;
+            _context.Update(jelo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");        
         }
 
         // GET: Jelo

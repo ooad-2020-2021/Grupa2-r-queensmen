@@ -9,11 +9,11 @@
         };
     var rucak = new Dictionary<string, string>
         {
-           { "kategorija", "Rucak" }
+           { "kategorija", "Ručak" }
         };
     var vecera = new Dictionary<string, string>
         {
-           { "kategorija", "Vecera" }
+           { "kategorija", "Večera" }
         };
 }
 
@@ -23,7 +23,7 @@
 
 
 <h1>JelaPoKategorijama</h1>
-
+<a asp-controller="Jelo" asp-action="SvaJela"><input type="button" value="Sva jela"></a>
 <div id="sveKategorije">
     <div id="dorucak" class="kategorija">
         <h2>Dorucak</h2>
@@ -34,7 +34,21 @@
                 @: <div class="@item.Naziv">@item.Naziv</div>
             }
         }
-        <a asp-controller="Jelo" asp-action="DodajUKategoriju" asp-all-route-data="dorucak"><input type="button" value="Dodaj jelo"></a>
+    <div class="dodavanjeNovog">
+        <form asp-action="DodajUKategoriju" method="post">
+            <input type="hidden" name="kategorija" value="1">
+            <select name="idJela">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Id">@item.Naziv</option>
+                }
+            </select>
+            <input type="submit" value="Dodaj jelo" />
+            @Html.AntiForgeryToken()
+        </form>
+        
+    </div>
+
     </div>
     <div id="rucak" class="kategorija">
         <h2>Rucak</h2>
@@ -45,7 +59,20 @@
                 @: <div class="@item.Naziv">@item.Naziv</div>
             }
         }
-        <a asp-controller="Jelo" asp-action="DodajUKategoriju" asp-all-route-data="rucak"><input type="button" value="Dodaj jelo"></a>
+    <div class="dodavanjeNovog">
+        <form asp-action="DodajUKategoriju" method="post">
+            <input type="hidden" name="kategorija" value="2">
+            <select name="idJela">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Id">@item.Naziv</option>
+                }
+            </select>
+            <input type="submit" value="Dodaj jelo" />
+            @Html.AntiForgeryToken()
+        </form>
+
+    </div>
     </div>
     <div id="Vecera" class="kategorija">
         <h2>Vecera</h2>
@@ -56,7 +83,19 @@
                 @: <div class="@item.Naziv">@item.Naziv</div>
             }
         }
-        <a asp-controller="Jelo" asp-action="DodajUKategoriju" asp-all-route-data="vecera"><input type="button" value="Dodaj jelo"></a>
+    <div class="dodavanjeNovog">
+        <form asp-action="DodajUKategoriju" method="post">
+            <input type="hidden" name="kategorija" value="3">
+            <select name="idJela">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Id">@item.Naziv</option>
+                }
+            </select>
+            <input type="submit" value="Dodaj jelo" />
+            @Html.AntiForgeryToken()
+        </form>
+
     </div>
-</div>
-<a asp-controller="Jelo" asp-action="SvaJela"><input type="button" value="Sva jela"></a>
+    </div>
+</div
