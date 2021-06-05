@@ -22,8 +22,23 @@ namespace LifePlanner.Controllers
             _userManager = userManager;
         }
 
-        // GET: Jelo
         [ActionName("Index")]
+        public async Task<IActionResult> Index()
+        {
+            var korisnik = await _userManager.GetUserAsync(User);
+            IEnumerable<Jelo> jelaKorisnika = await _context.Jela.Where(j => j.Korisnik.Id == korisnik.Id).ToListAsync();
+            return View("JelaPoKategorijama", jelaKorisnika);
+        }
+
+        public async Task<IActionResult> dodajJeloUKategoriju(int kategorija)
+        {
+            var korisnik = await _userManager.GetUserAsync(User);
+            IEnumerable<Jelo> jelaKorisnika = await _context.Jela.Where(j => j.Korisnik.Id == korisnik.Id).ToListAsync();
+            return View("DodajJeloUKategoriju", jelaKorisnika);
+        }
+
+        // GET: Jelo
+        [ActionName("SvaJela")]
         public async Task<IActionResult> IndexSvaJela()
         {
             var kor = await _userManager.GetUserAsync(User);
@@ -32,7 +47,7 @@ namespace LifePlanner.Controllers
                 j => id == j.Korisnik.Id
             ).ToListAsync();
 
-            return View(jelaOdKorisnika);
+            return View("Index", jelaOdKorisnika);
         }
 
         // GET: Jelo/Details/5
@@ -169,21 +184,6 @@ namespace LifePlanner.Controllers
         private bool JeloExists(Guid id)
         {
             return _context.Jela.Any(e => e.Id == id);
-        }
-
-        [ActionName("SvaJela")]
-        public async Task<IActionResult> Index()
-        {
-            var korisnik = await _userManager.GetUserAsync(User);
-            IEnumerable<Jelo> jelaKorisnika = await _context.Jela.Where(j => j.Korisnik.Id == korisnik.Id).ToListAsync();
-            return View("JelaPoKategorijama", jelaKorisnika);
-        }
-
-        public async Task<IActionResult> dodajJeloUKategoriju(int kategorija)
-        {
-            var korisnik = await _userManager.GetUserAsync(User);
-            IEnumerable<Jelo> jelaKorisnika = await _context.Jela.Where(j => j.Korisnik.Id == korisnik.Id).ToListAsync();
-            return View("DodajJeloUKategoriju", jelaKorisnika);
         }
     }
 }
