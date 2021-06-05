@@ -1,0 +1,12 @@
+﻿#sveKategorije {
+    display: flex;
+    justify-content: space-between;
+}
+
+.kategorija {
+    flex-direction: column;
+}
+
+input {
+    margin-top: 20px;
+}
