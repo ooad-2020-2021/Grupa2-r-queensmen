@@ -2,7 +2,7 @@
 @model IEnumerable<LifePlanner.Models.Jelo>
 
 @{
-    ViewData["Title"] = "JelaPoKategorijama";\
+    ViewData["Title"] = "JelaPoKategorijama";
 }
 
 @section Styles {
@@ -19,7 +19,15 @@
         {
             if (item.Kategorija == KategorijaJela.Dorucak)
             {
-                @: <div class="@item.Naziv">@item.Naziv</div>
+    <form asp-action="DodajUKategoriju" method="post" style="margin: 0; padding: 0;">
+        <p class="@item.Naziv">
+            @item.Naziv
+            <input type="hidden" name="kategorija" value="0" style="display: inline;">
+            <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+            <input type="submit" value="Ukloni jelo" style="display: inline;" />
+        </p>
+        @Html.AntiForgeryToken()
+    </form>
             }
         }
     <div class="dodavanjeNovog">
@@ -44,7 +52,15 @@
         {
             if (item.Kategorija == KategorijaJela.Rucak)
             {
-                @: <div class="@item.Naziv">@item.Naziv</div>
+    <form asp-action="DodajUKategoriju" method="post" style="margin: 0; padding: 0;">
+        <p class="@item.Naziv">
+            @item.Naziv
+                <input type="hidden" name="kategorija" value="0" style="display: inline;">
+                <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+                <input type="submit" value="Ukloni jelo" style="display: inline;" />
+            </p>
+        @Html.AntiForgeryToken()
+    </form>
             }
         }
     <div class="dodavanjeNovog">
@@ -68,7 +84,15 @@
         {
             if (item.Kategorija == KategorijaJela.Vecera)
             {
-                @: <div class="@item.Naziv">@item.Naziv</div>
+    <form asp-action="DodajUKategoriju" method="post" style="margin: 0; padding: 0;">
+        <p class="@item.Naziv">
+            @item.Naziv
+                <input type="hidden" name="kategorija" value="0" style="display: inline;">
+                <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+                <input type="submit" value="Ukloni jelo" style="display: inline;" />
+            </p>
+        @Html.AntiForgeryToken()
+    </form>
             }
         }
     <div class="dodavanjeNovog">
@@ -86,4 +110,4 @@
 
     </div>
     </div>
-</div
+</div>
