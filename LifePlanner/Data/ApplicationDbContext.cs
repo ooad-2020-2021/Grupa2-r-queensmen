@@ -44,7 +44,7 @@ namespace LifePlanner.Data
             modelBuilder.Entity<Trening>().Property(nameof(Trening.Vjezbe)).HasConversion(splitStringConverter);
             modelBuilder.Entity<Jelo>().Property(nameof(Jelo.Sastojci)).HasConversion(splitStringConverter);
 
-            modelBuilder.Entity<Voda>().Property(nameof(Voda.Kolicina)).HasColumnType("decimal(2,2)");
+            modelBuilder.Entity<Voda>().Property(nameof(Voda.Kolicina)).HasColumnType("decimal(7,2)");
 
 
             modelBuilder.Entity<Jelo>().ToTable("Jela");
