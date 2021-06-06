@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var danasnjiDatum = DateTime.Now.ToString("dd_M_yyyy");
+    //za request
+    var datumZaRequest = new Dictionary<string, string>
+    {
+        {"datumString", danasnjiDatum }
+    };
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,6 +40,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Jelo" asp-action="">Jelovnik</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Voda" asp-action="" asp-all-route-data="datumZaRequest">Jelovnik</a>
                         </li>
                     </ul>
                 </div>
