@@ -1,4 +1,8 @@
-﻿let calendar = document.querySelector('.calendar')
+﻿const url = new URL(location.href)
+const datumNiz = url.searchParams.get("datumString").split("_");
+const odabraniDatumKorisnika = new Date(datumNiz[2], datumNiz[1]-1, datumNiz[0])
+
+let calendar = document.querySelector('.calendar')
 
 const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -19,7 +23,7 @@ generateCalendar = (month, year) => {
 
     calendar_days.innerHTML = ''
 
-    let currDate = new Date()
+    let currDate = odabraniDatumKorisnika
     if (month < 0 || month > 11) month = currDate.getMonth()
     if (!year) year = currDate.getFullYear()
 
@@ -33,6 +37,10 @@ generateCalendar = (month, year) => {
 
     for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
         let day = document.createElement('div')
+        day.onclick = function (e) {
+            const datum = (i + 1 - first_day.getDay()) + "_" + (month + 1) + "_" + year;
+            location.href = "/Voda?datumString=" + datum;
+        }
         if (i >= first_day.getDay()) {
             day.classList.add('calendar-day-hover')
             day.innerHTML = i - first_day.getDay() + 1
@@ -67,7 +75,7 @@ month_picker.onclick = () => {
     month_list.classList.add('show')
 }
 
-let currDate = new Date()
+let currDate = odabraniDatumKorisnika
 
 let curr_month = { value: currDate.getMonth() }
 let curr_year = { value: currDate.getFullYear() }
