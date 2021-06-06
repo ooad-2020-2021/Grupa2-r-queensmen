@@ -10,6 +10,7 @@
     --light-hover: #edf0f5;
     --light-text: #151426;
     --blue: #0000ff;
+    --pink: #ffb6c1;
     --white: #fff;
     --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     --font-family: cursive;
@@ -173,6 +174,17 @@
         }
 
             .calendar-days div.curr-date span {
+                display: none;
+            }
+
+        .calendar-days div.curr-date-pravi,
+        .calendar-days div.curr-date-pravi:hover {
+            background-color: var(--pink);
+            color: var(--black);
+            border-radius: 50%;
+        }
+
+            .calendar-days div.curr-date-pravi span {
                 display: none;
             }
 

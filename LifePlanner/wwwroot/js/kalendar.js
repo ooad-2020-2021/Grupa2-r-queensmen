@@ -24,6 +24,7 @@ generateCalendar = (month, year) => {
     calendar_days.innerHTML = ''
 
     let currDate = odabraniDatumKorisnika
+    let currDatePravi = new Date();
     if (month < 0 || month > 11) month = currDate.getMonth()
     if (!year) year = currDate.getFullYear()
 
@@ -48,9 +49,15 @@ generateCalendar = (month, year) => {
                             <span></span>
                             <span></span>
                             <span></span>`
+            if (i - first_day.getDay() + 1 === currDatePravi.getDate() && year === currDatePravi.getFullYear() && month === currDatePravi.getMonth()) {
+                day.classList.add('curr-date-pravi')
+                day.classList.remove('curr-date')
+            }
             if (i - first_day.getDay() + 1 === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
                 day.classList.add('curr-date')
+                day.classList.remove('curr-date-pravi')
             }
+            
         }
         calendar_days.appendChild(day)
     }
