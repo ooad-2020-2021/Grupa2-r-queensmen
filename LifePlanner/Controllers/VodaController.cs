@@ -25,17 +25,22 @@ namespace LifePlanner.Controllers
         // GET: Voda
         public async Task<IActionResult> Index(string datumString)
         {
-            DateTime datum = DateTime.ParseExact(datumString, "dd_M_yyyy", null);
-            var popijenaVodaNaDan = await _context.KolicineVode.FirstOrDefaultAsync(v => v.Datum == datum);
-            if (popijenaVodaNaDan == null)
+            DateTime datum = DateTime.ParseExact(datumString, "d_M_yyyy", null);
+            var vodaVecPostoji = await _context.KolicineVode.FirstOrDefaultAsync(v => v.Datum == datum);
+            if (vodaVecPostoji == null)
             {
                 ViewBag.voda = 0;
+                ViewBag.postoji = false;
+                ViewBag.id = null;
             }
             else
             {
-                ViewBag.voda = popijenaVodaNaDan.Kolicina;
+                ViewBag.voda = vodaVecPostoji.Kolicina;
+                ViewBag.postoji = true;
+                ViewBag.id = vodaVecPostoji.Id;
             }            
-            ViewBag.datum = datum.ToString("dd.M.yyyy");
+            ViewBag.datum = datum.ToString("d.M.yyyy");
+            ViewBag.datumFull = datum;
             var korisnik = await _userManager.GetUserAsync(User);
             return View(await _context.KolicineVode.Where(v => v.Korisnik.Id == korisnik.Id).ToListAsync());
         }
@@ -50,27 +55,12 @@ namespace LifePlanner.Controllers
             if (ModelState.IsValid)
             {
                 voda.Id = Guid.NewGuid();
+                voda.Korisnik = await _userManager.GetUserAsync(User);
                 _context.Add(voda);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { datumString = voda.Datum.ToString("d_M_yyyy") });
             }
-            return View(voda);
-        }
-
-        // GET: Voda/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var voda = await _context.KolicineVode.FindAsync(id);
-            if (voda == null)
-            {
-                return NotFound();
-            }
-            return View(voda);
+            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
         }
 
         // POST: Voda/Edit/5
@@ -103,9 +93,9 @@ namespace LifePlanner.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { datumString = voda.Datum.ToString("d_M_yyyy") });
             }
-            return View(voda);
+            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
         }
 
         private bool VodaExists(Guid id)

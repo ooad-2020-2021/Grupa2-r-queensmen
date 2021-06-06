@@ -35,15 +35,36 @@
         <div class="month-list"></div>
     </div>
 
-    <form aps-action="Create">
-        <p>
-            Na dan @ViewBag.datum popio/la sam:
-            <input type="number" name="Kolicina" value="@ViewBag.voda" />
-            litara vode!
-            <input type="date" name="Datum" value="@ViewBag.datum" hidden />
-        </p>
-        <input type="submit" value="Spasi" />
-    </form>
+    @if (ViewBag.postoji == false)
+    {
+        @:
+        <form asp-action="Create" method="POST">
+            <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
+            <p>
+                Na dan @ViewBag.datum popio/la sam:
+                <input type="number" name="Kolicina" value="@ViewBag.voda" />
+                litara vode!
+            </p>
+            <input type="submit" value="Spasi" />
+            @Html.AntiForgeryToken()
+        </form>
+    }
+    else
+    {
+        @: 
+            <form asp-action="Edit" method="POST">
+            <input type="text" name="id" value="@ViewBag.id" hidden />
+            <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
+            <p>
+                Na dan @ViewBag.datum popio/la sam:
+                <input type="number" name="Kolicina" value="@ViewBag.voda" />
+                litara vode!
+            </p>
+            <input type="submit" value="Spasi" />
+            @Html.AntiForgeryToken()
+            </form>
+    }
+
 </div>
 
 @section Scripts {
@@ -51,5 +72,5 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/kalendar.css"/>
+    <link rel="stylesheet" href="~/css/kalendar.css" />
 }
