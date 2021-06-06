@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel;
 
 namespace LifePlanner.Areas.Identity.Pages.Account
 {
@@ -44,8 +45,8 @@ namespace LifePlanner.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [DisplayName("Korisničko ime ili email")]
+            public string UnameOrEmail { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -78,7 +79,17 @@ namespace LifePlanner.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(Input.Email);
+                var user = await _userManager.FindByEmailAsync(Input.UnameOrEmail);
+                if (user == null)
+                {
+                    user = await _userManager.FindByNameAsync(Input.UnameOrEmail);
+                }
+                //morao dodati ovaj null-check jer u suprotnom PasswordSignInAsync ne radi null-check i baci 500
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
+                }
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
