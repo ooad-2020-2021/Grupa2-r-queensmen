@@ -1,5 +1,5 @@
 ﻿@{ 
-    var danasnjiDatum = DateTime.Now.ToString("dd_M_yyyy");
+    var danasnjiDatum = DateTime.Now.ToString("d_M_yyyy");
     //za request
     var datumZaRequest = new Dictionary<string, string>
     {
@@ -42,7 +42,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Jelo" asp-action="">Jelovnik</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Voda" asp-action="" asp-all-route-data="datumZaRequest">Jelovnik</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Voda" asp-action="" asp-all-route-data="datumZaRequest">Voda</a>
                         </li>
                     </ul>
                 </div>
