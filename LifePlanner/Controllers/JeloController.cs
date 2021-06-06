@@ -32,7 +32,6 @@ namespace LifePlanner.Controllers
 
         [HttpPost, ActionName("DodajUKategoriju")]
         [ValidateAntiForgeryToken]
-        //moglo je sa id atributom
         public async Task<IActionResult> dodajJeloUKategoriju(int kategorija, Guid idJela)
         {
             KategorijaJela _kategorija = (KategorijaJela)kategorija;
