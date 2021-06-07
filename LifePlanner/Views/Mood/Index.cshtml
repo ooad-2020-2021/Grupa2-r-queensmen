@@ -1,6 +1,6 @@
-﻿@model IEnumerable<LifePlanner.Models.Voda>
-
-    ViewData["Title"] = "Voda";
+﻿@model IEnumerable<LifePlanner.Models.Raspolozenje>
+@{
+    ViewData["Title"] = "Raspolozenje";
     Layout = "_layout";
 }
 
@@ -42,9 +42,10 @@
         <form asp-action="Create" method="POST">
             <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
             <p>
-                Na dan @ViewBag.datum popio/la sam:
-                <input type="number" name="Kolicina" value="@ViewBag.voda" />
-                litara vode!
+                Na dan @ViewBag.datum osjecao/la sam se:
+                <select asp-items="Html.GetEnumSelectList<TipRaspolozenja>()" name="TipRaspolozenja">
+                    <option selected="selected" value="" disabled>Please select</option>
+                </select>
             </p>
             <input type="submit" value="Spasi" />
             @Html.AntiForgeryToken()
@@ -52,18 +53,38 @@
     }
     else
     {
-        @: 
-            <form asp-action="Edit" method="POST">
+        @:
+        <form asp-action="Edit" method="POST">
             <input type="text" name="id" value="@ViewBag.id" hidden />
             <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
             <p>
-                Na dan @ViewBag.datum popio/la sam:
-                <input type="number" name="Kolicina" value="@ViewBag.voda" />
-                litara vode!
+                Na dan @ViewBag.datum osjecao/la sam se:
+                <select name="TipRaspolozenja">
+                    @if (ViewBag.raspolozenjeInt == 0)
+                    {
+                        <option selected="selected" value="0"> Dobro </option>
+                        <option  value="1"> Srednje </option>
+                        <option  value="2"> Lose </option>
+                    }
+                    else if (ViewBag.raspolozenjeInt == 1)
+                    {
+                        <option  value="0"> Dobro </option>
+                        <option  selected="selected" value="1"> Srednje </option>
+                        <option  value="2"> Lose </option>
+
+                    }
+                    else if (ViewBag.raspolozenjeInt == 2)
+                    {
+                        <option  value="0"> Dobro </option>
+                        <option  value="1"> Srednje </option>
+                        <option selected="selected" value="2"> Lose </option>
+
+                    }
+                </select>
             </p>
             <input type="submit" value="Spasi" />
             @Html.AntiForgeryToken()
-            </form>
+        </form>
     }
 
 </div>

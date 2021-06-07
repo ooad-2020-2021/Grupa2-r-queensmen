@@ -40,7 +40,12 @@ generateCalendar = (month, year) => {
         let day = document.createElement('div')
         day.onclick = function (e) {
             const datum = (i + 1 - first_day.getDay()) + "_" + (month + 1) + "_" + year;
-            location.href = "/Voda?datumString=" + datum;
+            if (location.href.includes("Voda")) {
+                location.href = "/Voda?datumString=" + datum;
+            }
+            else if (location.href.includes("Mood")) {
+                location.href = "/Mood?datumString=" + datum;
+            }
         }
         if (i >= first_day.getDay()) {
             day.classList.add('calendar-day-hover')
