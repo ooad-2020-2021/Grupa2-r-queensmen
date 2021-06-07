@@ -29,13 +29,11 @@ namespace LifePlanner.Controllers
             var moodVecPostoji = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == datum);
             if (moodVecPostoji == null)
             {
-                ViewBag.raspolozenje = TipRaspolozenja.Dobro;
                 ViewBag.postoji = false;
                 ViewBag.id = null;
             }
             else
             {
-                ViewBag.raspolozenje = moodVecPostoji.TipRaspolozenja;
                 ViewBag.postoji = true;
                 ViewBag.id = moodVecPostoji.Id;
                 ViewBag.raspolozenjeInt =(int)moodVecPostoji.TipRaspolozenja;
