@@ -58,7 +58,11 @@ namespace LifePlanner.Controllers
                 raspolozenje.Korisnik = await _userManager.GetUserAsync(User);
                 _context.Add(raspolozenje);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { datumString = raspolozenje.Datum.ToString("d_M_yyyy") });
+                string referer = Request.Headers["Referer"].ToString();
+
+                //posto se dodavanje novog raspolozenja odvija i iz Zadatak kontrolera i odavde, moramo uraditi redirect na referera, a ne striktno na index Mood-a
+                return Redirect(referer);
+                //return RedirectToAction(nameof(Index), new { datumString = raspolozenje.Datum.ToString("d_M_yyyy") });
             }
             return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
         }
@@ -93,7 +97,10 @@ namespace LifePlanner.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), new { datumString = raspolozenje.Datum.ToString("d_M_yyyy") });
+                string referer = Request.Headers["Referer"].ToString();
+                //posto se dodavanje novog raspolozenja odvija i iz Zadatak kontrolera i odavde, moramo uraditi redirect na referera, a ne striktno na index Mood-a
+                return Redirect(referer);
+                //return RedirectToAction(nameof(Index), new { datumString = raspolozenje.Datum.ToString("d_M_yyyy") });
             }
             return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
         }
