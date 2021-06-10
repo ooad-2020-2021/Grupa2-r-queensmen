@@ -6,25 +6,29 @@
 }
 
 <div id="glavno">
+    <div id="savjet">
+        <h2>Savjet</h2>
+        <p style="text-align: center;">@ViewBag.savjet</p>
+    </div>
     <div id="zadaci">
         <h2>Zadaci</h2>
-        @foreach(var item in Model)
-            {
-        <form asp-action="Delete" method="POST">
-            <p class="@item.Naziv">
-                @item.Naziv
-                <input type="hidden" name="id" value="@item.Id" style="display: inline;">
-                <input type="submit" value="Završi zadatak" style="display: inline;" />
-            </p>
-            @Html.AntiForgeryToken()
-        </form>
-            }
         <form asp-action="Create" method="POST">
             <input type="text" name="Naziv" />
-            <input type="datetime" name="Datum" value="@ViewBag.datum" hidden/>
+            <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
             <input type="submit" value="Dodaj zadatak" />
             @Html.AntiForgeryToken()
         </form>
+        @foreach (var item in Model)
+        {
+            <form asp-action="Delete" method="POST">
+                <p class="@item.Naziv">
+                    @item.Naziv
+                    <input type="hidden" name="id" value="@item.Id" style="display: inline;">
+                    <input type="submit" value="Završi zadatak" style="display: inline;" />
+                </p>
+                @Html.AntiForgeryToken()
+            </form>
+        }
     </div>
 
 
@@ -56,6 +60,51 @@
         <div class="calendar-footer">
         </div>
         <div class="month-list"></div>
+    </div>
+
+    <div id="kakavDan">
+        <h2>Kakav je bio dan?</h2>
+        <div>
+            @if (ViewBag.raspolozenje == true)
+            {
+                <form asp-controller="Mood" asp-action="Edit" method="POST">
+                    <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
+                    <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
+                    <input type="number" name="TipRaspolozenja" value="0" hidden />
+                    <input type="submit" name="submit" value="Dobro" />
+                </form>
+                <form asp-controller="Mood" asp-action="Edit" method="POST">
+                    <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
+                    <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
+                    <input type="number" name="TipRaspolozenja" value="1" hidden />
+                    <input type="submit" name="submit" value="Srednje" />
+                </form>
+                <form asp-controller="Mood" asp-action="Edit" method="POST">
+                    <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
+                    <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
+                    <input type="number" name="TipRaspolozenja" value="2" hidden />
+                    <input type="submit" name="submit" value="Loše" />
+                </form>
+            }
+            else
+            {
+                <form asp-controller="Mood" asp-action="Create" method="POST">
+                    <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
+                    <input type="number" name="TipRaspolozenja" value="0" hidden />
+                    <input type="submit" name="submit" value="Dobro" />
+                </form>
+                <form asp-controller="Mood" asp-action="Create" method="POST">
+                    <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
+                    <input type="number" name="TipRaspolozenja" value="1" hidden />
+                    <input type="submit" name="submit" value="Srednje" />
+                </form>
+                <form asp-controller="Mood" asp-action="Create" method="POST">
+                    <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
+                    <input type="number" name="TipRaspolozenja" value="2" hidden />
+                    <input type="submit" name="submit" value="Loše" />
+                </form>
+            }
+        </div>
     </div>
 </div>
 
