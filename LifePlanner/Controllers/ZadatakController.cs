@@ -43,6 +43,7 @@ namespace LifePlanner.Controllers
 
             var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == datum && r.Korisnik == korisnik);
             ViewBag.datum = datum;
+            ViewBag.danasnjiDatum = DateTime.Today;
             if (raspolozenje != null)
             {
                 ViewBag.raspolozenje = true;
