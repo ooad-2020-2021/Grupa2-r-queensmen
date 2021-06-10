@@ -15,6 +15,12 @@ namespace LifePlanner.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<RegistrovaniKorisnik> _userManager;
+        private readonly List<string> savjeti = new List<string>
+        {
+            "No matter how busy you may think you are, you must find time for reading, or surrender yourself to self-chosen ignorance.",
+            "The authority of those who teach is often an obstacle to those who want to learn.",
+            "To acquire knowledge, one must study; but to acquire wisdom, one must observe."
+        };
 
         public ZadatakController(ApplicationDbContext context, UserManager<RegistrovaniKorisnik> userManager)
         {
@@ -27,8 +33,26 @@ namespace LifePlanner.Controllers
         {
             //dohvati sve taskove za taj dan i posalji ih na view
             DateTime datum = DateTime.ParseExact(datumString, "d_M_yyyy", null);
-            var taskoviZaDan = await _context.Zadaci.Where(z => z.Datum == datum).ToListAsync();
+            var korisnik = await _userManager.GetUserAsync(User);
+
+
+            var taskoviZaDan = await _context.Zadaci.Where(z => z.Datum == datum && z.Korisnik == korisnik).ToListAsync();
+            string randomSavjet = savjeti[new Random().Next(savjeti.Count)];
+            ViewBag.savjet = randomSavjet;
             ViewBag.datum = datum;
+
+            var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == datum && r.Korisnik == korisnik);
+            ViewBag.datum = datum;
+            if (raspolozenje != null)
+            {
+                ViewBag.raspolozenje = true;
+                ViewBag.raspolozenjeId = raspolozenje.Id;
+            }
+            else
+            {
+                ViewBag.raspolozenje = false;
+            }
+
             return View(taskoviZaDan);
         }
 
