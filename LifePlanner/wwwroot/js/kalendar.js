@@ -46,6 +46,9 @@ generateCalendar = (month, year) => {
             else if (location.href.includes("Mood")) {
                 location.href = "/Mood?datumString=" + datum;
             }
+            else if (location.href.includes("Zadatak")) {
+                location.href = "/Zadatak?datumString=" + datum;
+            }
         }
         if (i >= first_day.getDay()) {
             day.classList.add('calendar-day-hover')
