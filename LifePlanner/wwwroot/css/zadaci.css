@@ -9,3 +9,37 @@ h2 {
 
     text-align: center;
 }
+
+#glavno {
+    display: grid;
+    width: 100%;
+    /*height: 250px;*/
+    grid-template-areas: "savjet savjet savjet savjet"
+        "zadaci zadaci kalendar kalendar"
+        "zadaci zadaci kalendar kalendar"
+        "kakavDan kakavDan kalendar kalendar"
+        ;
+}
+
+#glavno > #savjet {
+    grid-area: savjet;
+    margin-bottom: 100px;
+}
+
+#glavno > #zadaci {
+    grid-area: zadaci;
+    overflow-y: scroll;
+    height: 50vh;
+    width: 30vw;
+}
+
+#glavno > .calendar {
+    grid-area: kalendar;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+#glavno > #kakavDan {
+    grid-area: kakavDan;
+    margin-top: 60px;
+}
