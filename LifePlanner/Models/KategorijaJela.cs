@@ -8,7 +8,7 @@ namespace LifePlanner.Models
 {
     public enum KategorijaJela
     {
-        [Display(Name = "Ne smije se vidjeti")]
+        [Display(Name = "Nema kategorije")]
         Nedefinisano,
         [Display(Name = "Doručak")]
         Dorucak,
