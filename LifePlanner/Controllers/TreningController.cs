@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using LifePlanner.Data;
 using LifePlanner.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LifePlanner.Controllers
 {
+    [Authorize]
     public class TreningController : Controller
     {
         private readonly ApplicationDbContext _context;
