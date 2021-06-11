@@ -47,33 +47,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-        var counter = @Model.Vjezbe.Count;
-        function addRow() {
-            var table = document.getElementById("VjezbeTabela");
-            var row = table.insertRow(-1);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            cell1.innerHTML = '<input type="text" name="Vjezbe[' + counter + ']"/>';
-            cell2.innerHTML = '<input type="button" id="Vjezbe[' + counter + ']" onclick="obrisi(this)" value="Obrisi" /">'
-            counter++;
-        }
-
-        function obrisi(el) {
-            let inputZaBrisanje;
-            var allInputs = document.getElementsByTagName("input");
-            for (var x = 0; x < allInputs.length; x++)
-                if (allInputs[x].name == el.id) {
-                    inputZaBrisanje = allInputs[x];
-                    break;
-                }
-            inputZaBrisanje.value = "";
-            inputZaBrisanje.style.visibility = "hidden";
-            el.style.visibility = "hidden";
-            return false;
-        }
-
-        $(document).ready(() => {
-
-        })
+        window.counter = @Model.Vjezbe.Count;
 </script>
+<script src="~/js/tabelaZaUnos.js"></script>
 }
