@@ -29,10 +29,21 @@ namespace LifePlanner.Controllers
             _userManager = userManager;
         }
 
+        public class ViewModel
+        {
+            public string Savjet { get; set; }
+            public DateTime OdabraniDatum { get; set; }
+            public DateTime DanasnjiDatum { get { return DateTime.Today; } }
+            public RegistrovaniKorisnik Korisnik { get; set; }
+            public List<Zadatak> taskoviZaDan { get; set; }
+            public Raspolozenje Raspolozenje { get; set; }
+        };
+
         // GET: Zadatak
         public async Task<IActionResult> Index(string datumString)
         {
-            //dohvati sve taskove za taj dan i posalji ih na view
+            ViewModel viewModel = new ViewModel();
+
             DateTime datum = DateTime.ParseExact(datumString, "d_M_yyyy", null);
             var korisnik = await _userManager.GetUserAsync(User);
             List<Zadatak> taskoviZaDan = new List<Zadatak> { };
@@ -55,7 +66,6 @@ namespace LifePlanner.Controllers
             ViewBag.datum = datum;
 
             var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == datum && r.Korisnik == korisnik);
-            ViewBag.datum = datum;
             ViewBag.danasnjiDatum = DateTime.Today;
             if (raspolozenje != null)
             {
@@ -66,8 +76,12 @@ namespace LifePlanner.Controllers
             {
                 ViewBag.raspolozenje = false;
             }
-
-            return View(taskoviZaDan);
+            viewModel.Korisnik = korisnik;
+            viewModel.Savjet = randomSavjet;
+            viewModel.OdabraniDatum = datum;
+            viewModel.taskoviZaDan = taskoviZaDan;
+            viewModel.Raspolozenje = raspolozenje;
+            return View(viewModel);
         }
 
         // POST: Zadatak/Create

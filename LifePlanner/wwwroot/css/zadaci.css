@@ -23,7 +23,7 @@ h2 {
 
 #glavno > #savjet {
     grid-area: savjet;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 #glavno > #zadaci {

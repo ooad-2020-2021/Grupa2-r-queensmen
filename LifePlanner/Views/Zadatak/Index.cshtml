@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LifePlanner.Models.Zadatak>
+﻿@model LifePlanner.Controllers.ZadatakController.ViewModel;
 
 @{
     ViewData["Title"] = "Index";
@@ -14,11 +14,11 @@
         <h2>Zadaci</h2>
         <form asp-action="Create" method="POST">
             <input type="text" name="Naziv" />
-            <input type="datetime" name="Datum" value="@ViewBag.datum" hidden />
+            <input type="datetime" name="Datum" value="@Model.OdabraniDatum" hidden />
             <input type="submit" value="Dodaj zadatak" />
             @Html.AntiForgeryToken()
         </form>
-        @foreach (var item in Model)
+        @foreach (var item in Model.taskoviZaDan)
         {
             <form asp-action="Delete" method="POST">
                 <p class="@item.Naziv">
@@ -67,41 +67,41 @@
         <div id="kakavDan">
             <h2>Kakav je bio dan?</h2>
             <div style="display: flex; flex-direction: row;">
-                @if (ViewBag.raspolozenje == true)
+                @if (Model.Raspolozenje != null)
                 {
                     <form asp-controller="Mood" asp-action="Edit" method="POST" >
-                        <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
-                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="text" name="id" value="@Model.Raspolozenje.Id" hidden />
+                        <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="0" hidden />
                         <input type="submit" name="submit" value="Dobro" />
                     </form>
                     <form asp-controller="Mood" asp-action="Edit" method="POST">
-                        <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
-                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="text" name="id" value="@Model.Raspolozenje.Id" hidden />
+                        <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="1" hidden />
                         <input type="submit" name="submit" value="Srednje" />
                     </form>
                     <form asp-controller="Mood" asp-action="Edit" method="POST">
-                        <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
-                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="text" name="id" value="@Model.Raspolozenje.Id" hidden />
                         <input type="number" name="TipRaspolozenja" value="2" hidden />
                         <input type="submit" name="submit" value="Loše" />
+                        @Html.AntiForgeryToken()
                     </form>
                 }
                 else
                 {
                     <form asp-controller="Mood" asp-action="Create" method="POST">
-                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="0" hidden />
                         <input type="submit" name="submit" value="Dobro" />
                     </form>
                     <form asp-controller="Mood" asp-action="Create" method="POST">
-                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="1" hidden />
                         <input type="submit" name="submit" value="Srednje" />
                     </form>
                     <form asp-controller="Mood" asp-action="Create" method="POST">
-                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="2" hidden />
                         <input type="submit" name="submit" value="Loše" />
                     </form>
