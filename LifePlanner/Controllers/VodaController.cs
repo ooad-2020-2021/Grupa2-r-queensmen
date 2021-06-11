@@ -40,8 +40,8 @@ namespace LifePlanner.Controllers
                 ViewBag.voda = vodaVecPostoji.Kolicina;
                 ViewBag.postoji = true;
                 ViewBag.id = vodaVecPostoji.Id;
-            }            
-            ViewBag.datum = datum.ToString("d.M.yyyy");
+            }
+            ViewBag.datum = DajDatumZaPrikaz(datum);
             ViewBag.datumFull = datum;
             var korisnik = await _userManager.GetUserAsync(User);
             return View(await _context.KolicineVode.Where(v => v.Korisnik.Id == korisnik.Id).ToListAsync());
@@ -60,9 +60,9 @@ namespace LifePlanner.Controllers
                 voda.Korisnik = await _userManager.GetUserAsync(User);
                 _context.Add(voda);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { datumString = voda.Datum.ToString("d_M_yyyy") });
+                return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(voda.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
         }
 
         // POST: Voda/Edit/5
@@ -95,14 +95,24 @@ namespace LifePlanner.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), new { datumString = voda.Datum.ToString("d_M_yyyy") });
+                return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(voda.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
         }
 
         private bool VodaExists(Guid id)
         {
             return _context.KolicineVode.Any(v => v.Id == id);
+        }
+
+        private string DajDatumZaParametra(DateTime datum)
+        {
+            return datum.ToString("d_M_yyyy");
+        }
+
+        private string DajDatumZaPrikaz(DateTime datum)
+        {
+            return datum.ToString("d.M.yyyy");
         }
     }
 }

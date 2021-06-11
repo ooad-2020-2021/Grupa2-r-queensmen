@@ -92,7 +92,7 @@ namespace LifePlanner.Controllers
                     }
                     postojeciTaskovi.Add(zadatak);
                     HttpContext.Session.SetObjectAsJson("NeRegZadaci", postojeciTaskovi);
-                    return RedirectToAction(nameof(Index), new { datumString = zadatak.Datum.ToString("d_M_yyyy") });
+                    return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak.Datum) });
                 }
 
 
@@ -100,9 +100,9 @@ namespace LifePlanner.Controllers
                 zadatak.Korisnik = korisnik;
                 _context.Add(zadatak);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { datumString = zadatak.Datum.ToString("d_M_yyyy") });
+                return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
         }
 
         // POST: Zadatak/Edit/5
@@ -135,9 +135,9 @@ namespace LifePlanner.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), new { datumString = zadatak.Datum.ToString("d_M_yyyy") });
+                return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
         }
 
         // POST: Zadatak/Delete/5
@@ -151,17 +151,22 @@ namespace LifePlanner.Controllers
                 Zadatak zadatak1 = postojeciTaskovi.FirstOrDefault(z => z.Id == id);
                 postojeciTaskovi.Remove(zadatak1);
                 HttpContext.Session.SetObjectAsJson("NeRegZadaci", postojeciTaskovi);
-                return RedirectToAction(nameof(Index), new { datumString = zadatak1.Datum.ToString("d_M_yyyy") });
+                return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak1.Datum) });
             }
             var zadatak = await _context.Zadaci.FindAsync(id);
             _context.Zadaci.Remove(zadatak);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
         }
 
         private bool ZadatakExists(Guid id)
         {
             return _context.Zadaci.Any(e => e.Id == id);
+        }
+
+        private string DajDatumZaParametra(DateTime datum)
+        {
+            return datum.ToString("d_M_yyyy");
         }
     }
 }

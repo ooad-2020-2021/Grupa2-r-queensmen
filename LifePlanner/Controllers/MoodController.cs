@@ -66,7 +66,7 @@ namespace LifePlanner.Controllers
                 return Redirect(referer);
                 //return RedirectToAction(nameof(Index), new { datumString = raspolozenje.Datum.ToString("d_M_yyyy") });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
         }
 
         // POST: Mood/Edit/5
@@ -104,12 +104,17 @@ namespace LifePlanner.Controllers
                 return Redirect(referer);
                 //return RedirectToAction(nameof(Index), new { datumString = raspolozenje.Datum.ToString("d_M_yyyy") });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DateTime.Now.ToString("d_M_yyyy") });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
         }
 
         private bool RaspolozenjeExists(Guid id)
         {
             return _context.Raspolozenja.Any(e => e.Id == id);
+        }
+
+        private string DajDatumZaParametra(DateTime datum)
+        {
+            return datum.ToString("d_M_yyyy");
         }
     }
 }
