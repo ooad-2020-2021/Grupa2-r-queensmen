@@ -29,7 +29,7 @@ h2 {
 #glavno > #zadaci {
     grid-area: zadaci;
     overflow-y: scroll;
-    height: 50vh;
+    height: 35vh;
     width: 30vw;
 }
 

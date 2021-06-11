@@ -62,50 +62,53 @@
         <div class="month-list"></div>
     </div>
 
-    <div id="kakavDan">
-        <h2>Kakav je bio dan?</h2>
-        <div style="display: flex; flex-direction: row;">
-            @if (ViewBag.raspolozenje == true)
-            {
-                <form asp-controller="Mood" asp-action="Edit" method="POST" >
-                    <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
-                    <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
-                    <input type="number" name="TipRaspolozenja" value="0" hidden />
-                    <input type="submit" name="submit" value="Dobro" />
-                </form>
-                <form asp-controller="Mood" asp-action="Edit" method="POST">
-                    <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
-                    <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
-                    <input type="number" name="TipRaspolozenja" value="1" hidden />
-                    <input type="submit" name="submit" value="Srednje" />
-                </form>
-                <form asp-controller="Mood" asp-action="Edit" method="POST">
-                    <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
-                    <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
-                    <input type="number" name="TipRaspolozenja" value="2" hidden />
-                    <input type="submit" name="submit" value="Loše" />
-                </form>
-            }
-            else
-            {
-                <form asp-controller="Mood" asp-action="Create" method="POST">
-                    <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
-                    <input type="number" name="TipRaspolozenja" value="0" hidden />
-                    <input type="submit" name="submit" value="Dobro" />
-                </form>
-                <form asp-controller="Mood" asp-action="Create" method="POST">
-                    <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
-                    <input type="number" name="TipRaspolozenja" value="1" hidden />
-                    <input type="submit" name="submit" value="Srednje" />
-                </form>
-                <form asp-controller="Mood" asp-action="Create" method="POST">
-                    <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
-                    <input type="number" name="TipRaspolozenja" value="2" hidden />
-                    <input type="submit" name="submit" value="Loše" />
-                </form>
-            }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div id="kakavDan">
+            <h2>Kakav je bio dan?</h2>
+            <div style="display: flex; flex-direction: row;">
+                @if (ViewBag.raspolozenje == true)
+                {
+                    <form asp-controller="Mood" asp-action="Edit" method="POST" >
+                        <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
+                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="number" name="TipRaspolozenja" value="0" hidden />
+                        <input type="submit" name="submit" value="Dobro" />
+                    </form>
+                    <form asp-controller="Mood" asp-action="Edit" method="POST">
+                        <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
+                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="number" name="TipRaspolozenja" value="1" hidden />
+                        <input type="submit" name="submit" value="Srednje" />
+                    </form>
+                    <form asp-controller="Mood" asp-action="Edit" method="POST">
+                        <input type="number" name="id" value="@ViewBag.raspolozenjeId" hidden />
+                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="number" name="TipRaspolozenja" value="2" hidden />
+                        <input type="submit" name="submit" value="Loše" />
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="Mood" asp-action="Create" method="POST">
+                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="number" name="TipRaspolozenja" value="0" hidden />
+                        <input type="submit" name="submit" value="Dobro" />
+                    </form>
+                    <form asp-controller="Mood" asp-action="Create" method="POST">
+                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="number" name="TipRaspolozenja" value="1" hidden />
+                        <input type="submit" name="submit" value="Srednje" />
+                    </form>
+                    <form asp-controller="Mood" asp-action="Create" method="POST">
+                        <input type="datetime" name="Datum" value="@ViewBag.danasnjiDatum" hidden />
+                        <input type="number" name="TipRaspolozenja" value="2" hidden />
+                        <input type="submit" name="submit" value="Loše" />
+                    </form>
+                }
+            </div>
         </div>
-    </div>
+    }
 </div>
 
 

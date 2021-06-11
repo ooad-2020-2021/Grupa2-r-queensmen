@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LifePlanner.Data;
 using LifePlanner.Models;
 using Microsoft.AspNetCore.Identity;
+using LifePlanner.Utility;
 
 namespace LifePlanner.Controllers
 {
@@ -34,9 +35,21 @@ namespace LifePlanner.Controllers
             //dohvati sve taskove za taj dan i posalji ih na view
             DateTime datum = DateTime.ParseExact(datumString, "d_M_yyyy", null);
             var korisnik = await _userManager.GetUserAsync(User);
+            List<Zadatak> taskoviZaDan = new List<Zadatak> { };
+            
+            if (korisnik == null)
+            {
+                taskoviZaDan = HttpContext.Session.GetObjectFromJson<List<Zadatak>>("NeRegZadaci");
+                if (taskoviZaDan == null)
+                {
+                    taskoviZaDan = new List<Zadatak> { };
+                }
+            }
+            else
+            {
+                taskoviZaDan = await _context.Zadaci.Where(z => z.Datum == datum && z.Korisnik == korisnik).ToListAsync();
+            }
 
-
-            var taskoviZaDan = await _context.Zadaci.Where(z => z.Datum == datum && z.Korisnik == korisnik).ToListAsync();
             string randomSavjet = savjeti[new Random().Next(savjeti.Count)];
             ViewBag.savjet = randomSavjet;
             ViewBag.datum = datum;
@@ -67,7 +80,24 @@ namespace LifePlanner.Controllers
             if (ModelState.IsValid)
             {
                 zadatak.Id = Guid.NewGuid();
-                zadatak.Korisnik = await _userManager.GetUserAsync(User);
+                RegistrovaniKorisnik korisnik = await _userManager.GetUserAsync(User);
+
+                //spasi u sesiju umjesto bazu
+                if (korisnik == null)
+                {
+                    List<Zadatak> postojeciTaskovi = HttpContext.Session.GetObjectFromJson<List<Zadatak>>("NeRegZadaci");
+                    if (postojeciTaskovi == null)
+                    {
+                        postojeciTaskovi = new List<Zadatak> { };
+                    }
+                    postojeciTaskovi.Add(zadatak);
+                    HttpContext.Session.SetObjectAsJson("NeRegZadaci", postojeciTaskovi);
+                    return RedirectToAction(nameof(Index), new { datumString = zadatak.Datum.ToString("d_M_yyyy") });
+                }
+
+
+
+                zadatak.Korisnik = korisnik;
                 _context.Add(zadatak);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { datumString = zadatak.Datum.ToString("d_M_yyyy") });
@@ -115,6 +145,14 @@ namespace LifePlanner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                List<Zadatak> postojeciTaskovi = HttpContext.Session.GetObjectFromJson<List<Zadatak>>("NeRegZadaci");
+                Zadatak zadatak1 = postojeciTaskovi.FirstOrDefault(z => z.Id == id);
+                postojeciTaskovi.Remove(zadatak1);
+                HttpContext.Session.SetObjectAsJson("NeRegZadaci", postojeciTaskovi);
+                return RedirectToAction(nameof(Index), new { datumString = zadatak1.Datum.ToString("d_M_yyyy") });
+            }
             var zadatak = await _context.Zadaci.FindAsync(id);
             _context.Zadaci.Remove(zadatak);
             await _context.SaveChangesAsync();
