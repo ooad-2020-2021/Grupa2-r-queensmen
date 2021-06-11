@@ -28,22 +28,11 @@ namespace LifePlanner.Controllers
         public async Task<IActionResult> Index(string datumString)
         {
             DateTime datum = DateTime.ParseExact(datumString, "d_M_yyyy", null);
-            var moodVecPostoji = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == datum);
-            if (moodVecPostoji == null)
-            {
-                ViewBag.postoji = false;
-                ViewBag.id = null;
-            }
-            else
-            {
-                ViewBag.postoji = true;
-                ViewBag.id = moodVecPostoji.Id;
-                ViewBag.raspolozenjeInt =(int)moodVecPostoji.TipRaspolozenja;
-            }
+            var korisnik = await _userManager.GetUserAsync(User);
+            var moodVecPostoji = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == datum && r.Korisnik == korisnik);
             ViewBag.datum = datum.ToString("d.M.yyyy");
             ViewBag.datumFull = datum;
-            var korisnik = await _userManager.GetUserAsync(User);
-            return View(await _context.Raspolozenja.Where(r => r.Korisnik.Id == korisnik.Id).ToListAsync());
+            return View(moodVecPostoji);
         }
 
 

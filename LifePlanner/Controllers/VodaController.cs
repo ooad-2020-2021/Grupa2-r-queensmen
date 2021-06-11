@@ -28,23 +28,11 @@ namespace LifePlanner.Controllers
         public async Task<IActionResult> Index(string datumString)
         {
             DateTime datum = DateTime.ParseExact(datumString, "d_M_yyyy", null);
-            var vodaVecPostoji = await _context.KolicineVode.FirstOrDefaultAsync(v => v.Datum == datum);
-            if (vodaVecPostoji == null)
-            {
-                ViewBag.voda = 0;
-                ViewBag.postoji = false;
-                ViewBag.id = null;
-            }
-            else
-            {
-                ViewBag.voda = vodaVecPostoji.Kolicina;
-                ViewBag.postoji = true;
-                ViewBag.id = vodaVecPostoji.Id;
-            }
+            var korisnik = await _userManager.GetUserAsync(User);
+            var vodaVecPostoji = await _context.KolicineVode.FirstOrDefaultAsync(v => v.Datum == datum && v.Korisnik == korisnik);
             ViewBag.datum = DajDatumZaPrikaz(datum);
             ViewBag.datumFull = datum;
-            var korisnik = await _userManager.GetUserAsync(User);
-            return View(await _context.KolicineVode.Where(v => v.Korisnik.Id == korisnik.Id).ToListAsync());
+            return View(vodaVecPostoji);
         }
 
         // POST: Voda/Create

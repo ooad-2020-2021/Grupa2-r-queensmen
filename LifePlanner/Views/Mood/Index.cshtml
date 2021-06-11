@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LifePlanner.Models.Raspolozenje>
+﻿@model LifePlanner.Models.Raspolozenje
 @{
     ViewData["Title"] = "Raspolozenje";
     Layout = "_layout";
@@ -36,7 +36,7 @@
     </div>
 
 
-    @if (ViewBag.postoji == false)
+    @if (Model == null)
     {
         @:
         <form asp-action="Create" method="POST">
@@ -55,25 +55,25 @@
     {
         @:
         <form asp-action="Edit" method="POST">
-            <input type="text" name="id" value="@ViewBag.id" hidden />
+            <input type="text" name="id" value="@Model.Id" hidden />
             <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
             <p>
                 Na dan @ViewBag.datum osjecao/la sam se:
                 <select name="TipRaspolozenja">
-                    @if (ViewBag.raspolozenjeInt == 0)
+                    @if ((int)Model.TipRaspolozenja == 0)
                     {
                         <option selected="selected" value="0"> Dobro </option>
                         <option  value="1"> Srednje </option>
                         <option  value="2"> Lose </option>
                     }
-                    else if (ViewBag.raspolozenjeInt == 1)
+                    else if ((int)Model.TipRaspolozenja == 1)
                     {
                         <option  value="0"> Dobro </option>
                         <option  selected="selected" value="1"> Srednje </option>
                         <option  value="2"> Lose </option>
 
                     }
-                    else if (ViewBag.raspolozenjeInt == 2)
+                    else if ((int)Model.TipRaspolozenja == 2)
                     {
                         <option  value="0"> Dobro </option>
                         <option  value="1"> Srednje </option>
