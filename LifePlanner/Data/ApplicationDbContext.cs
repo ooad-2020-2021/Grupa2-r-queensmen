@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -38,6 +39,10 @@ namespace LifePlanner.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Cascade;
+            }
             base.OnModelCreating(modelBuilder);
 
             var splitStringConverter = new ValueConverter<IList<String>, String>(v => String.Join("@", v), v => v.Split(new[] { '@' }));
@@ -54,6 +59,11 @@ namespace LifePlanner.Data
             modelBuilder.Entity<Trening>().ToTable("Treninzi");
             modelBuilder.Entity<Voda>().ToTable("KolicineVode");
             modelBuilder.Entity<RegistrovaniKorisnik>().ToTable("RegistrovaniKorisnici");
+
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Cascade;
+            }
         }
     }
 }
