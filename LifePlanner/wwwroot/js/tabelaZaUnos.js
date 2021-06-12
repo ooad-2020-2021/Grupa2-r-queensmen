@@ -20,7 +20,7 @@
 }
 
 function obrisi(el) {
-let inputZaBrisanje;
+    let inputZaBrisanje;
     var allInputs = document.getElementsByTagName("input");
     for (var x = 0; x < allInputs.length; x++)
         if (allInputs[x].name == el.id) {
