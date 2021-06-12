@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LifePlanner.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<RegistrovaniKorisnik>
+    public class ApplicationDbContext : IdentityDbContext<RegistrovaniKorisnik, IdentityRole, string>
     {
         private readonly DbContextOptions _options;
 

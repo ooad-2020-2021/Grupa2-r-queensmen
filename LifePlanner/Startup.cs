@@ -25,6 +25,33 @@ namespace LifePlanner
 
         public IConfiguration Configuration { get; }
 
+
+        //nije bilo potrebe ovu metodu praviti, moglo se jednostavno u bazi rucno dodati
+        //nije prvenstveno radilo jer sam pozvao AddEntityFrameworkStore dva puta
+        //tj. kada sam dodao kod za role zaboravio sam to uraditi iznad AddEntityFrameworkStore-a pa sam slucajno to pozvao jos jednom ispod rola
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<RegistrovaniKorisnik>>();
+
+            IdentityResult roleResult;
+            //Adding Admin Role
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                //create the roles and seed them to the database
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            //Assign Admin role to the main User here we have given our newly registered 
+            //login id for Admin management
+            RegistrovaniKorisnik user = await UserManager.FindByEmailAsync("admin@gmail.com");
+            bool vecURoli = await UserManager.IsInRoleAsync(user, "Admin");
+            if (!vecURoli)
+            {
+                await UserManager.AddToRoleAsync(user, "Admin");
+            }
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -32,6 +59,7 @@ namespace LifePlanner
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<RegistrovaniKorisnik>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<IdentityOptions>(options =>
             {
@@ -57,7 +85,7 @@ namespace LifePlanner
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -87,6 +115,8 @@ namespace LifePlanner
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateUserRoles(serviceProvider).Wait();
         }
     }
 }
