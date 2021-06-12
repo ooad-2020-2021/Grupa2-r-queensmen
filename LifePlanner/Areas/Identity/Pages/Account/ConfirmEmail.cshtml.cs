@@ -16,14 +16,18 @@ namespace LifePlanner.Areas.Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<RegistrovaniKorisnik> _userManager;
+        private readonly SignInManager<RegistrovaniKorisnik> _signInManager;
 
-        public ConfirmEmailModel(UserManager<RegistrovaniKorisnik> userManager)
+        public ConfirmEmailModel(UserManager<RegistrovaniKorisnik> userManager, SignInManager<RegistrovaniKorisnik> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [TempData]
         public string StatusMessage { get; set; }
+
+        public bool Uspjelo { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
@@ -40,7 +44,12 @@ namespace LifePlanner.Areas.Identity.Pages.Account
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+            StatusMessage = result.Succeeded ? "Čestitamo. Vaš email je potvrđen. Kliknite na Nastavi da započnete koristiti aplikaciju" : "Desila se greska prilikom potvrde email-a. Molimo kontaktirajte administratora na lifeplannerdemo@gmail.com";
+            Uspjelo = result.Succeeded;
+            if (Uspjelo)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+            }
             return Page();
         }
     }

@@ -1,7 +1,14 @@
 ﻿@page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "Potvrda email";
 }
 
 <h1>@ViewData["Title"]</h1>
+
+<p>@Model.StatusMessage</p>
+
+@if(Model.Uspjelo)
+{
+    <button><a href="/">Nastavi</a></button>
+}

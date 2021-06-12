@@ -90,6 +90,13 @@ namespace LifePlanner.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
+                bool potvrdjeno = await _userManager.IsEmailConfirmedAsync(user);
+
+                if (!potvrdjeno)
+                {
+                    ModelState.AddModelError("", "Molimo izvršite validaciju email-a");
+                    return Page();
+                }
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
