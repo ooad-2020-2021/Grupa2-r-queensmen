@@ -44,7 +44,7 @@ namespace LifePlanner.Areas.Identity.Pages.Account
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Čestitamo. Vaš email je potvrđen. Kliknite na Nastavi da započnete koristiti aplikaciju" : "Desila se greska prilikom potvrde email-a. Molimo kontaktirajte administratora na lifeplannerdemo@gmail.com";
+            StatusMessage = result.Succeeded ? "Čestitamo. Vaš email je potvrđen." : "Desila se greska prilikom potvrde email-a. Molimo kontaktirajte administratora na lifeplannerdemo@gmail.com";
             Uspjelo = result.Succeeded;
             if (Uspjelo)
             {
