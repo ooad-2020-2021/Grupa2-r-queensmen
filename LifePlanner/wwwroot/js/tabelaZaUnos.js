@@ -26,9 +26,9 @@ function obrisi(el) {
         if (allInputs[x].name == el.id) {
             inputZaBrisanje = allInputs[x];
             break;
-        }
+    }
     inputZaBrisanje.value = "";
-    inputZaBrisanje.style.visibility = "hidden";
-    el.style.visibility = "hidden";
+    inputZaBrisanje.style.display = "none";
+    el.style.display = "none";
     return false;
 }

@@ -19,16 +19,12 @@
             <button onclick="addRow()" type="button">Dodaj vježbu</button>
             </br>
             <table id="VjezbeTabela">
-                <tr>
-                    <th></th>
-                </tr> 
                 @for (int i = 0; i < Model.Vjezbe.Count; i++)
                 {
                     @:<tr>
                         @:<input type="text" name="Vjezbe[@i]" value="@Model.Vjezbe[i]"/>
                         @:<input type="button" id="Vjezbe[@i]" onclick="obrisi(this)" value="Obrisi" /">
                     @:</tr>
-                    <br>
                 }
             </table>
             <div class="form-group">
