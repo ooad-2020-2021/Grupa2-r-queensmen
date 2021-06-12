@@ -101,6 +101,16 @@ namespace LifePlanner.Controllers
                 
                 RegistrovaniKorisnik trenutni = await _userManager.GetUserAsync(User);
                 jelo.Korisnik = trenutni;
+
+                if (jelo.Sastojci == null)
+                {
+                    jelo.Sastojci = new List<string>();
+                }
+                else
+                {
+                    jelo.Sastojci = jelo.Sastojci.Where(v => v != null).ToList();
+                }
+
                 jelo.Sastojci = jelo.Sastojci.Where(s => s != null).ToList();
 
                 _context.Add(jelo);

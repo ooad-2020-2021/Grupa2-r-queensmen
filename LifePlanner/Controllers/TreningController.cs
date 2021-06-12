@@ -73,7 +73,14 @@ namespace LifePlanner.Controllers
                 trening.Id = Guid.NewGuid();
                 RegistrovaniKorisnik trenutni = await _userManager.GetUserAsync(HttpContext.User);
                 trening.Korisnik = trenutni;
-                trening.Vjezbe = trening.Vjezbe.Where(v => v != null).ToList();
+                if (trening.Vjezbe == null)
+                {
+                    trening.Vjezbe = new List<string>();
+                }
+                else
+                {
+                    trening.Vjezbe = trening.Vjezbe.Where(v => v != null).ToList();
+                }
                 _context.Add(trening);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

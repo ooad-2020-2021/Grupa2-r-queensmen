@@ -21,7 +21,13 @@
             @Html.DisplayNameFor(model => model.Vjezbe)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vjezbe)
+            <ul>
+                @foreach (string vjezba in Model.Vjezbe)
+                {
+                    if (vjezba.Length == 0) continue;
+                    <li style="">@vjezba</li>
+                }
+            </ul>
         </dd>
     </dl>
     

@@ -27,7 +27,13 @@
             @Html.DisplayNameFor(model => model.Sastojci)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sastojci)
+            <ul>
+                @foreach (var sastojak in Model.Sastojci)
+                {
+                    if (sastojak.Length == 0) continue;
+                    <li style="">@sastojak</li>
+                }
+            </ul>
         </dd>
     </dl>
     
