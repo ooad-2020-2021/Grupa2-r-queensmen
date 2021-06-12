@@ -44,6 +44,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Mood" asp-action="" asp-all-route-data="datumZaRequest">Raspolozenje</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="">Admin</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
