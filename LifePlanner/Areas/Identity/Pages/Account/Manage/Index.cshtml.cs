@@ -23,8 +23,6 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
-        public string Username { get; set; }
-
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -38,6 +36,9 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Prezime")]
             public string Prezime { get; set; }
+
+            [Display(Name = "Korisničko ime")]
+            public string Username { get; set; }
         }
 
         private async Task LoadAsync(RegistrovaniKorisnik user)
@@ -45,13 +46,12 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName;
-
             Input = new InputModel
             {
                 Ime = user.Ime,
-                Prezime = user.Prezime
-            };
+                Prezime = user.Prezime,
+                Username = userName
+        };
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -90,6 +90,16 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
                 if (!rezultat.Succeeded)
                 {
                     StatusMessage = "Neočekivana greška prilikom izmjene imena i prezimena";
+                    return RedirectToPage();
+                }
+            }
+            var username = Input.Username;
+            if (username != user.UserName)
+            {
+                var rezultat = await _userManager.SetUserNameAsync(user, username);
+                if (!rezultat.Succeeded)
+                {
+                    StatusMessage = "Neočekivana greška prilikom korisničkog imena";
                     return RedirectToPage();
                 }
             }
