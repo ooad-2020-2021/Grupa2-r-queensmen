@@ -170,7 +170,7 @@ namespace LifePlanner.Controllers
             var zadatak = await _context.Zadaci.FindAsync(id);
             _context.Zadaci.Remove(zadatak);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak.Datum) });
         }
 
         private bool ZadatakExists(Guid id)
