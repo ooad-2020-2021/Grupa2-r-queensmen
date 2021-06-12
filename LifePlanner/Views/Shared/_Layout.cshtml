@@ -32,18 +32,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Zadatak" asp-action="" asp-all-route-data="datumZaRequest">Zadaci</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Trening" asp-action="">Treninzi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Jelo" asp-action="">Jelovnik</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Voda" asp-action="" asp-all-route-data="datumZaRequest">Voda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mood" asp-action="" asp-all-route-data="datumZaRequest">Raspolozenje</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Trening" asp-action="">Treninzi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Jelo" asp-action="">Jelovnik</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Voda" asp-action="" asp-all-route-data="datumZaRequest">Voda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Mood" asp-action="" asp-all-route-data="datumZaRequest">Raspolozenje</a>
+                            </li>
+                        }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
