@@ -65,7 +65,7 @@ namespace LifePlanner.Controllers
             ViewBag.savjet = randomSavjet;
             ViewBag.datum = datum;
 
-            var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == datum && r.Korisnik == korisnik);
+            var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == DateTime.Today && r.Korisnik == korisnik);
             ViewBag.danasnjiDatum = DateTime.Today;
             if (raspolozenje != null)
             {
