@@ -1,7 +1,7 @@
 ﻿function addRow() {
     let table;
     let inHtml1, inHtml2;
-    if (location.href.includes('Vjezba')) {
+    if (location.href.includes('Trening')) {
         table = document.getElementById("VjezbeTabela");
         inHtml1 = '<input type="text" name="Vjezbe[' + counter + ']" />';
         inHtml2 = '<input type="button" id="Vjezbe[' + counter + ']" onclick="obrisi(this)" value="Obrisi" /">';
