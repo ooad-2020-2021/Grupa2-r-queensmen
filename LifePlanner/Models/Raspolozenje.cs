@@ -19,7 +19,7 @@ namespace LifePlanner.Models
 
         [EnumDataType(typeof (TipRaspolozenja))]
         [Required]
-        [Display(Name = "Raspolozenje: ")]
+        [Display(Name = "Raspoloženje: ")]
         public TipRaspolozenja TipRaspolozenja { get; set; }
 
         public RegistrovaniKorisnik Korisnik { get; set; }

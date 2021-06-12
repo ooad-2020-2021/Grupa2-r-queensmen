@@ -17,7 +17,7 @@ namespace LifePlanner.Models
 
         [EnumDataType(typeof(KategorijaJela))]
      
-        [Display(Name = "KategorijaJela: ")]
+        [Display(Name = "Kategorija jela: ")]
         public KategorijaJela Kategorija { get; set; }
       
         public IList<string> Sastojci { get; set; }

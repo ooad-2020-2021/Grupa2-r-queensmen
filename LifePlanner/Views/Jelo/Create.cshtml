@@ -1,12 +1,11 @@
 ﻿@model LifePlanner.Models.Jelo
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Kreiranje jela";
 }
 
-<h1>Create</h1>
+<h1>Kreiranje jela</h1>
 
-<h4>Jelo</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,21 +16,21 @@
                 <input asp-for="Naziv" class="form-control" />
                 <span asp-validation-for="Naziv" class="text-danger"></span>
             </div>
-        <button onclick="addRow()" type="button">Dodaj red</button>
+        <button onclick="addRow()" type="button">Dodaj sastojak</button>
             <table id="SastojciTabela">
                 <tr>
                     <th></th>
                 </tr>
             </table>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Spasi" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="SvaJela">Back to List</a>
+    <a asp-action="SvaJela">Nazad na listu</a>
 </div>
 
 @section Scripts {

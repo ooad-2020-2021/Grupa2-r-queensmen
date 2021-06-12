@@ -4,7 +4,7 @@ const odabraniDatumKorisnika = new Date(datumNiz[2], datumNiz[1]-1, datumNiz[0])
 
 let calendar = document.querySelector('.calendar')
 
-const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const month_names = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktobar', 'Novembar', 'Decembar']
 
 isLeapYear = (year) => {
     return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0)

@@ -1,13 +1,12 @@
 ﻿@model LifePlanner.Models.Jelo
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Opis jela";
 }
 
-<h1>Details</h1>
+<h1>Opis jela</h1>
 
 <div>
-    <h4>Jelo</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -26,11 +25,18 @@
             @Html.DisplayNameFor(model => model.Sastojci)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sastojci)
+            <table>
+                @for (int i = 0; i < Model.Sastojci.Count; i++)
+                {
+                    @:<tr>
+                        @Model.Sastojci[i]
+                    @:</tr></br>
+                }
+            </table>
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="SvaJela">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Uredi</a> |
+    <a asp-action="SvaJela">Nazad na listu</a>
 </div>

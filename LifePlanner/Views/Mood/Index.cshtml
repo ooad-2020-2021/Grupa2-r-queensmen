@@ -1,6 +1,6 @@
 ﻿@model LifePlanner.Models.Raspolozenje
 @{
-    ViewData["Title"] = "Raspolozenje";
+    ViewData["Title"] = "Raspoloženje";
     Layout = "_layout";
 }
 
@@ -20,13 +20,13 @@
         </div>
         <div class="calendar-body">
             <div class="calendar-week-day">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
+                <div>Ned</div>
+                <div>Pon</div>
+                <div>Uto</div>
+                <div>Sri</div>
+                <div>Čet</div>
+                <div>Pet</div>
+                <div>Sub</div>
             </div>
             <div class="calendar-days"></div>
         </div>
@@ -42,9 +42,9 @@
         <form asp-action="Create" method="POST">
             <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
             <p>
-                Na dan @ViewBag.datum osjecao/la sam se:
+                Na dan @ViewBag.datum osjećao/la sam se:
                 <select asp-items="Html.GetEnumSelectList<TipRaspolozenja>()" name="TipRaspolozenja">
-                    <option selected="selected" value="" disabled>Please select</option>
+                    <option selected="selected" value="" disabled>Molimo odaberite</option>
                 </select>
             </p>
             <input type="submit" value="Spasi" />
@@ -58,26 +58,26 @@
             <input type="text" name="id" value="@Model.Id" hidden />
             <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
             <p>
-                Na dan @ViewBag.datum osjecao/la sam se:
+                Na dan @ViewBag.datum osjećao/la sam se:
                 <select name="TipRaspolozenja">
                     @if ((int)Model.TipRaspolozenja == 0)
                     {
                         <option selected="selected" value="0"> Dobro </option>
                         <option  value="1"> Srednje </option>
-                        <option  value="2"> Lose </option>
+                        <option  value="2"> Loše </option>
                     }
                     else if ((int)Model.TipRaspolozenja == 1)
                     {
                         <option  value="0"> Dobro </option>
                         <option  selected="selected" value="1"> Srednje </option>
-                        <option  value="2"> Lose </option>
+                        <option  value="2"> Loše </option>
 
                     }
                     else if ((int)Model.TipRaspolozenja == 2)
                     {
                         <option  value="0"> Dobro </option>
                         <option  value="1"> Srednje </option>
-                        <option selected="selected" value="2"> Lose </option>
+                        <option selected="selected" value="2"> Loše </option>
 
                     }
                 </select>

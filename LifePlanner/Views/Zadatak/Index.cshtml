@@ -1,7 +1,7 @@
 ﻿@model LifePlanner.Controllers.ZadatakController.ViewModel;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Zadaci";
     Layout = "_layout";
 }
 
@@ -10,6 +10,7 @@
         <h2>Savjet</h2>
         <p style="text-align: center;">@ViewBag.savjet</p>
     </div>
+    <hr />
     <div id="zadaci">
         <h2>Zadaci</h2>
         <form asp-action="Create" method="POST">
@@ -47,13 +48,13 @@
         </div>
         <div class="calendar-body">
             <div class="calendar-week-day">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
+                <div>Ned</div>
+                <div>Pon</div>
+                <div>Uto</div>
+                <div>Sri</div>
+                <div>Čet</div>
+                <div>Pet</div>
+                <div>Sub</div>
             </div>
             <div class="calendar-days"></div>
         </div>
