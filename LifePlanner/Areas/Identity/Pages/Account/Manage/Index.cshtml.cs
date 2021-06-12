@@ -33,9 +33,11 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            [Display(Name = "Ime")]
+            public string Ime { get; set; }
+
+            [Display(Name = "Prezime")]
+            public string Prezime { get; set; }
         }
 
         private async Task LoadAsync(RegistrovaniKorisnik user)
@@ -47,7 +49,8 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Ime = user.Ime,
+                Prezime = user.Prezime
             };
         }
 
@@ -77,13 +80,16 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            var ime = user.Ime;
+            var prezime = user.Prezime;
+            if (Input.Ime != ime || Input.Prezime != prezime)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+                user.Ime = Input.Ime;
+                user.Prezime = Input.Prezime;
+                var rezultat = await _userManager.UpdateAsync(user);
+                if (!rezultat.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    StatusMessage = "Neočekivana greška prilikom izmjene imena i prezimena";
                     return RedirectToPage();
                 }
             }
