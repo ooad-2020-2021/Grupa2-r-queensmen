@@ -1,7 +1,10 @@
-﻿@model IEnumerable<LifePlanner.Models.RegistrovaniKorisnik>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<RegistrovaniKorisnik> _userManager;
+@model IEnumerable<LifePlanner.Models.RegistrovaniKorisnik>
 @{
     ViewData["Title"] = "Admin";
     Layout = "_layout";
+    var user = await _userManager.GetUserAsync(User);
 }
 
 <h1>Admin</h1>
@@ -10,15 +13,16 @@
 <div>
     @foreach (var item in Model)
     {
-        <form asp-action="BrisiKorisnika" method="POST" style="margin-bottom: 20px">
-            <div class="podaci" style="display: flex; flex-direction: row; justify-content: space-between;">
-                <p>@item.Id</p>
-                <p>@item.Ime</p>
-                <p>@item.Prezime</p>
-            </div>
-            <input type="text" name="Id" value="@item.Id" hidden/>
-            <input type="submit" name="brisanje" value="Obriši korisnika" />
-            @Html.AntiForgeryToken()
-        </form>
-    }
+        if (item.Id == user.Id) continue;
+            <form asp-action="BrisiKorisnika" method="POST" style="margin-bottom: 20px">
+                <div class="podaci" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <p>@item.Id</p>
+                    <p>@item.Ime</p>
+                    <p>@item.Prezime</p>
+                </div>
+                <input type="text" name="Id" value="@item.Id" hidden />
+                <input type="submit" name="brisanje" value="Obriši korisnika" />
+                @Html.AntiForgeryToken()
+            </form>
+        }
 </div>

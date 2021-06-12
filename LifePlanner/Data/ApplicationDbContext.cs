@@ -60,6 +60,9 @@ namespace LifePlanner.Data
             modelBuilder.Entity<Voda>().ToTable("KolicineVode");
             modelBuilder.Entity<RegistrovaniKorisnik>().ToTable("RegistrovaniKorisnici");
 
+
+            //isti komad koda ima na pocetku metode
+            //nek se nadje, ovo radi, nek stoji!
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Cascade;
