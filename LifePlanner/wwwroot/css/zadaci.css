@@ -1,4 +1,9 @@
-﻿#zadaci {
+﻿body {
+    background: url('../img/background.jpg');
+    background-size: cover;
+}
+
+#zadaci {
     margin: auto;
     width: 50%;
     padding: 10px;
@@ -17,20 +22,36 @@ h2 {
     grid-template-areas: "savjet savjet savjet savjet"
         "zadaci zadaci kalendar kalendar"
         "zadaci zadaci kalendar kalendar"
+        "zadaci zadaci kalendar kalendar"
         "kakavDan kakavDan kalendar kalendar"
-        ;
+        "kakavDan kakavDan kalendar kalendar";
 }
+
+
+#glavno > div {
+    background-color: white;
+    border-radius: 30px;
+}
+
 
 #glavno > #savjet {
     grid-area: savjet;
     margin-bottom: 50px;
 }
 
+
+
 #glavno > #zadaci {
     grid-area: zadaci;
-    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-width: none;
     height: 35vh;
     width: 30vw;
+    margin: 0;
+}
+
+#zadaci::-webkit-scrollbar {
+    display: none; /* Safari and Chrome, i za Operu od nase drage kolegice */
 }
 
 #glavno > .calendar {
@@ -42,4 +63,10 @@ h2 {
 #glavno > #kakavDan {
     grid-area: kakavDan;
     margin-top: 60px;
+    width: 30vw;
+    padding: 15px;
+}
+
+#glavno > #kakavDan > * {
+
 }

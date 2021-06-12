@@ -16,7 +16,7 @@
         <form asp-action="Create" method="POST">
             <input type="text" name="Naziv" />
             <input type="datetime" name="Datum" value="@Model.OdabraniDatum" hidden />
-            <input type="submit" value="Dodaj zadatak" />
+            <input type="submit" value="Dodaj zadatak" class="btn btn-primary" style="margin-top: 5px;"/>
             @Html.AntiForgeryToken()
         </form>
         @foreach (var item in Model.taskoviZaDan)
@@ -25,7 +25,7 @@
                 <p class="@item.Naziv">
                     @item.Naziv
                     <input type="hidden" name="id" value="@item.Id" style="display: inline;">
-                    <input type="submit" value="Završi zadatak" style="display: inline;" />
+                    <input type="submit" value="Završi zadatak" style="display: inline;" class="btn btn-outline-danger"/>
                 </p>
                 @Html.AntiForgeryToken()
             </form>
@@ -66,26 +66,26 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div id="kakavDan">
-            <h2>Kakav je bio dan?</h2>
-            <div style="display: flex; flex-direction: row;">
+            <h2>Kako je prošao dan?</h2>
+            <div style="display: flex; flex-direction: row; text-align: center;">
                 @if (Model.Raspolozenje != null)
                 {
                     <form asp-controller="Mood" asp-action="Edit" method="POST" >
                         <input type="text" name="id" value="@Model.Raspolozenje.Id" hidden />
                         <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="0" hidden />
-                        <input type="submit" name="submit" value="Dobro" />
+                        <input type="submit" name="submit" value="Dobro" class="btn btn-success"/>
                     </form>
                     <form asp-controller="Mood" asp-action="Edit" method="POST">
                         <input type="text" name="id" value="@Model.Raspolozenje.Id" hidden />
                         <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="1" hidden />
-                        <input type="submit" name="submit" value="Srednje" />
+                        <input type="submit" name="submit" value="Srednje" class="btn btn-warning"/>
                     </form>
                     <form asp-controller="Mood" asp-action="Edit" method="POST">
                         <input type="text" name="id" value="@Model.Raspolozenje.Id" hidden />
                         <input type="number" name="TipRaspolozenja" value="2" hidden />
-                        <input type="submit" name="submit" value="Loše" />
+                        <input type="submit" name="submit" value="Loše" class="btn btn-danger"/>
                         @Html.AntiForgeryToken()
                     </form>
                 }
@@ -94,17 +94,17 @@
                     <form asp-controller="Mood" asp-action="Create" method="POST">
                         <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="0" hidden />
-                        <input type="submit" name="submit" value="Dobro" />
+                        <input type="submit" name="submit" value="Dobro" class="btn btn-outline-success"/>
                     </form>
                     <form asp-controller="Mood" asp-action="Create" method="POST">
                         <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="1" hidden />
-                        <input type="submit" name="submit" value="Srednje" />
+                        <input type="submit" name="submit" value="Srednje" class="btn btn-outline-warning"/>
                     </form>
                     <form asp-controller="Mood" asp-action="Create" method="POST">
                         <input type="datetime" name="Datum" value="@Model.DanasnjiDatum" hidden />
                         <input type="number" name="TipRaspolozenja" value="2" hidden />
-                        <input type="submit" name="submit" value="Loše" />
+                        <input type="submit" name="submit" value="Loše" class="btn btn-outline-danger"/>
                     </form>
                 }
             </div>
