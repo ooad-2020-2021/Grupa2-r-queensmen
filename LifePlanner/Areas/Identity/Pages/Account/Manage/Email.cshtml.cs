@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using LifePlanner.Utility;
 
 namespace LifePlanner.Areas.Identity.Pages.Account.Manage
 {
@@ -94,17 +95,16 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
             {
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmailChange",
                     pageHandler: null,
                     values: new { userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                EmailHelper emailHelper = new EmailHelper();
+                await emailHelper.SendEmailAsync(Input.NewEmail, callbackUrl);
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = "Link za potvrdu je poslan na novi mail. Ako email ne dođe, kontaktirajte administratora na lifeplannerdemo@gmail.com";
                 return RedirectToPage();
             }
 
@@ -135,12 +135,10 @@ namespace LifePlanner.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            EmailHelper emailHelper = new EmailHelper();
+            await emailHelper.SendEmailAsync(email, callbackUrl);
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Link za potvrdu je poslan na novi mail. Ako email ne dođe, kontaktirajte administratora na lifeplannerdemo@gmail.com";
             return RedirectToPage();
         }
     }
