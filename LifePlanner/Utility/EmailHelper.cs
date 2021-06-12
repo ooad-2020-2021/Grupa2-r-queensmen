@@ -8,7 +8,7 @@ namespace LifePlanner.Utility
 {
     public class EmailHelper
     {
-        public async Task<bool> SendEmail(string userEmail, string confirmationLink)
+        public async Task<bool> SendEmailAsync(string userEmail, string confirmationLink)
         {
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("lifeplannerdemo@gmail.com");

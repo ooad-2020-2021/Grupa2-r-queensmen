@@ -56,7 +56,7 @@ namespace LifePlanner.Areas.Identity.Pages.Account
                 protocol: Request.Scheme);
 
             EmailHelper emailHelper = new EmailHelper();
-            Uspjesno = await emailHelper.SendEmail(user.Email, EmailConfirmationUrl);
+            Uspjesno = await emailHelper.SendEmailAsync(user.Email, EmailConfirmationUrl);
 
             return Page();
         }
