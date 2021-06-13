@@ -46,6 +46,5 @@ select {
     appearance: none;
     border-radius: 10px;
     width: 125px;
-    background: url('../img/face.ico') 96% / 20% no-repeat #EEE;
     padding: 3px;
 }
