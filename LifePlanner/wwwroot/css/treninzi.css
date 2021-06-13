@@ -31,9 +31,15 @@
     position: relative;
 }
 
-#naslov > form {
+#naslov > #dodaj {
     position: absolute;
     right: 0;
+    top: 45%;
+}
+
+#naslov > #sortiraj {
+    position: absolute;
+    left: 0;
     top: 45%;
 }
 

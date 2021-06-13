@@ -9,6 +9,7 @@ using LifePlanner.Data;
 using LifePlanner.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using LifePlanner.Utility.Strategy;
 
 namespace LifePlanner.Controllers
 {
@@ -17,11 +18,13 @@ namespace LifePlanner.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<RegistrovaniKorisnik> _userManager;
+        private SortStrategy<Trening> _sortTreninga;
 
         public TreningController(ApplicationDbContext context, UserManager<RegistrovaniKorisnik> userManager)
         {
             _context = context;
             _userManager = userManager;
+            _sortTreninga = new BrojVjezbiSort();
         }
 
         // GET: Trening
@@ -169,6 +172,39 @@ namespace LifePlanner.Controllers
             _context.Treninzi.Remove(trening);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost, ActionName("SetSortStrategy")]
+        [ValidateAntiForgeryToken]
+        public IActionResult PostaviSortStrategy(string strategyIme)
+        {
+            //moramo koristiti reflection
+            //paziti na assembly
+            //https://stackoverflow.com/questions/48527525/get-executing-assembly-name-in-net-core/50877287
+            //https://stackoverflow.com/questions/3512319/resolve-type-from-class-name-in-a-different-assembly
+            try
+            {
+                Type tip = Type.GetType(strategyIme, true);
+                Object o = Activator.CreateInstance(tip);
+                SortStrategy<Trening> noviStrategy = (SortStrategy<Trening>)o;
+                _sortTreninga = noviStrategy;
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        public async Task<IActionResult> Sort()
+        {
+            var kor = await _userManager.GetUserAsync(User);
+            string id = kor.Id;
+            IList<Trening> treninziOdKorisnika = await _context.Treninzi.Where(
+                t => id == t.Korisnik.Id
+            ).ToListAsync();
+            var treninziZaView = _sortTreninga.execute(treninziOdKorisnika);
+            return View("Index", treninziZaView);
         }
 
         private bool TreningExists(Guid id)
