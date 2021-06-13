@@ -79,7 +79,7 @@
 }
 
 .dugmad {
-    border-top: 1px solid white;
+    
 }
 
 
@@ -94,7 +94,9 @@ select {
     -moz-appearance: none;
     appearance: none;
     border-radius: 10px;
+    width: 175px;
     background: url('../img/food.ico') 96% / 15% no-repeat #EEE;
+    padding: 3px;
 }
 
 

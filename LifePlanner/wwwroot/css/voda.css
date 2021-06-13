@@ -1,0 +1,58 @@
+﻿body {
+    background: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#naslov {
+    margin-bottom: 25px;
+    border-bottom: 2px solid white;
+    position: relative;
+}
+
+
+#naslov > h1 {
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.formaDodavanje {
+    background-color: white;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+#glavno > div {
+    border-radius: 30px;
+}
+
+#glavno > form {
+    border-radius: 30px;
+}
+
+.datum {
+    font-weight: bold;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+}
+
+.kolicina {
+    width: 75px;
+    text-align: center;
+}
