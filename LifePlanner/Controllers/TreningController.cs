@@ -18,13 +18,14 @@ namespace LifePlanner.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<RegistrovaniKorisnik> _userManager;
-        private SortStrategy<Trening> _sortTreninga;
+        //prilikom svakog requesta kontroler se instancira nanovo
+        //zato ovo mora biti staticki atribut 
+        private static SortStrategy<Trening> _sortTreninga = new BrojVjezbiSort();
 
         public TreningController(ApplicationDbContext context, UserManager<RegistrovaniKorisnik> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _sortTreninga = new BrojVjezbiSort();
         }
 
         // GET: Trening
@@ -174,6 +175,9 @@ namespace LifePlanner.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
+        //OVO JE U SLUCAJU DA IMPLEMENTUJEMO DUGME NA FRONTENDU!!!!
         [HttpPost, ActionName("SetSortStrategy")]
         [ValidateAntiForgeryToken]
         public IActionResult PostaviSortStrategy(string strategyIme)
@@ -184,7 +188,7 @@ namespace LifePlanner.Controllers
             //https://stackoverflow.com/questions/3512319/resolve-type-from-class-name-in-a-different-assembly
             try
             {
-                Type tip = Type.GetType(strategyIme, true);
+                Type tip = Type.GetType("LifePlanner.Utility.Strategy." + strategyIme + ", " + System.Reflection.Assembly.GetExecutingAssembly().ToString(), true);
                 Object o = Activator.CreateInstance(tip);
                 SortStrategy<Trening> noviStrategy = (SortStrategy<Trening>)o;
                 _sortTreninga = noviStrategy;
@@ -196,8 +200,37 @@ namespace LifePlanner.Controllers
             }
         }
 
+        //OVO JE DA MOZEMO LAHKO IZ KODA MIJENJATI BEZ POTREBE ZA DUGMETOM NA FRONTENDU
+        public void PostaviSortStrategyBezView(string strategyIme)
+        {
+            //moramo koristiti reflection
+            //paziti na assembly
+            //https://stackoverflow.com/questions/48527525/get-executing-assembly-name-in-net-core/50877287
+            //https://stackoverflow.com/questions/3512319/resolve-type-from-class-name-in-a-different-assembly
+            try
+            {
+                Type tip = Type.GetType("LifePlanner.Utility.Strategy." + strategyIme + ", " + System.Reflection.Assembly.GetExecutingAssembly().ToString(), true);
+                Object o = Activator.CreateInstance(tip);
+                SortStrategy<Trening> noviStrategy = (SortStrategy<Trening>)o;
+                _sortTreninga = noviStrategy;
+                return;
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+        }
+
         public async Task<IActionResult> Sort()
         {
+            if (_sortTreninga.GetType() == typeof(BrojVjezbiSort))
+            {
+                PostaviSortStrategyBezView("NazivTreningaSort");
+            }
+            else
+            {
+                PostaviSortStrategyBezView("BrojVjezbiSort");
+            }
             var kor = await _userManager.GetUserAsync(User);
             string id = kor.Id;
             IList<Trening> treninziOdKorisnika = await _context.Treninzi.Where(
