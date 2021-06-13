@@ -2,47 +2,61 @@
 
 @{
     ViewData["Title"] = "Treninzi";
+    int i = 0;
 }
 
-<h1>Treninzi</h1>
+<div id="naslov">
+    <h1>Treninzi</h1>
+    <form asp-action="Create" style="display:inline;" method="get">
+        <button class="btn btn-light">Dodaj novi</button>
+    </form>
+</div>
 
-<p>
-    <a asp-action="Create">Kreiraj novi</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Naziv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vjezbe)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naziv)
-            </td>
-            <td>
-                <table>
-                    @for (int i = 0; i < item.Vjezbe.Count; i++)
+<div id="treninzi">
+    @foreach (var trening in Model)
+    {
+        <div class="trening">
+            <h2>@trening.Naziv</h2>
+            <hr />
+            <div class="vjezbe">
+                @foreach (var vjezba in trening.Vjezbe)
+                {
+                    if (i == 3)
                     {
-                        @:<tr>
-                            @item.Vjezbe[i]
-                        @:</tr><br/>
+                        break;
                     }
-                </table>
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Uredi</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Opis</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Obriši</a>
-            </td>
-        </tr>
+                    i++;
+                    <p>@vjezba</p>
+                }
+                @{ i = 0; }
+            </div>
+            <hr />
+            <div class="dugmad">
+                <form asp-action="Edit" style="display:inline;" method="get">
+                    <input type="text" name="id" value="@trening.Id" hidden />
+                    <button class="btn btn-secondary">Uredi</button>
+                </form>
+                <form asp-action="Details" style="display:inline;" method="get">
+                    <input type="text" name="id" value="@trening.Id" hidden />
+                    <button class="btn btn-info">Detaljnije</button>
+                </form>
+                <form asp-action="Delete" style="display:inline;" method="get">
+                    <input type="text" name="id" value="@trening.Id" hidden />
+                    <button class="btn btn-danger">Obriši</button>
+                </form>
+
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<!--
+
+<a asp-action="Create">Kreiraj novi</a>
+
+    -->
+@section Styles {
+    <link rel="stylesheet" href="~/css/treninzi.css" />
 }
-    </tbody>
-</table>
