@@ -20,7 +20,8 @@ namespace LifePlanner.Controllers
         {
             "No matter how busy you may think you are, you must find time for reading, or surrender yourself to self-chosen ignorance.",
             "The authority of those who teach is often an obstacle to those who want to learn.",
-            "To acquire knowledge, one must study; but to acquire wisdom, one must observe."
+            "To acquire knowledge, one must study; but to acquire wisdom, one must observe.",
+            "Ne upisujte RMA"
         };
 
         public ZadatakController(ApplicationDbContext context, UserManager<RegistrovaniKorisnik> userManager)
@@ -47,7 +48,7 @@ namespace LifePlanner.Controllers
             DateTime datum = DateTime.ParseExact(datumString, "d_M_yyyy", null);
             var korisnik = await _userManager.GetUserAsync(User);
             List<Zadatak> taskoviZaDan = new List<Zadatak> { };
-            
+
             if (korisnik == null)
             {
                 taskoviZaDan = HttpContext.Session.GetObjectFromJson<List<Zadatak>>("NeRegZadaci");
@@ -61,26 +62,13 @@ namespace LifePlanner.Controllers
                 taskoviZaDan = await _context.Zadaci.Where(z => z.Datum == datum && z.Korisnik == korisnik).ToListAsync();
             }
 
-            string randomSavjet = savjeti[new Random().Next(savjeti.Count)];
-            ViewBag.savjet = randomSavjet;
-            ViewBag.datum = datum;
-
             //https://stackoverflow.com/questions/30887367/how-to-compare-sql-datetime-and-c-sharp-datetime
             DateTime RuzniNepotrebniDatum = DateTime.ParseExact(DateTime.Today.ToString("d_M_yyyy"), "d_M_yyyy", null);
 
             var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == RuzniNepotrebniDatum && r.Korisnik == korisnik);
-            ViewBag.danasnjiDatum = DateTime.Today;
-            if (raspolozenje != null)
-            {
-                ViewBag.raspolozenje = true;
-                ViewBag.raspolozenjeId = raspolozenje.Id;
-            }
-            else
-            {
-                ViewBag.raspolozenje = false;
-            }
+
             viewModel.Korisnik = korisnik;
-            viewModel.Savjet = randomSavjet;
+            viewModel.Savjet = savjeti[new Random().Next(savjeti.Count)];
             viewModel.OdabraniDatum = datum;
             viewModel.taskoviZaDan = taskoviZaDan;
             viewModel.Raspolozenje = raspolozenje;
