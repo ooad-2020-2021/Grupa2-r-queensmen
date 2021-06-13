@@ -89,6 +89,13 @@
     margin-right: 20px;
 }
 
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    background: url('../img/food.ico') 96% / 15% no-repeat #EEE;
+}
 
 
 
