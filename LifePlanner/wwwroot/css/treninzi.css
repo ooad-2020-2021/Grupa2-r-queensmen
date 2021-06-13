@@ -25,12 +25,22 @@
 }
 */
 
-h1 {
-    color: white;
+#naslov {
     margin-bottom: 45px;
+    border-bottom: 2px solid white;
+    position: relative;
+}
+
+#naslov > form {
+    position: absolute;
+    right: 0;
+    top: 45%;
+}
+
+#naslov > h1 {
+    color: white;
     font-size: 60px;
     font-weight: bold;
-    border-bottom: 1px solid white;
 }
 
 #treninzi {
