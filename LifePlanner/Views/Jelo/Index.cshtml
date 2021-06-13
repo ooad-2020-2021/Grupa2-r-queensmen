@@ -1,48 +1,65 @@
 ﻿@model IEnumerable<LifePlanner.Models.Jelo>
 
 @{
-    ViewData["Title"] = "Sva jela";
+    ViewData["Title"] = "Jela";
+    int i = 0;
 }
 
-<h1>Sva jela</h1>
+<div id="naslov">
+    <h1>Jela</h1>
+    <form asp-action="Create" style="display:inline;" method="get" id="dodaj">
+        <button class="btn btn-light">Dodaj novo</button>
+    </form>
+    <form asp-action="" style="display:inline;" method="get" id="kategorije">
+        <button class="btn btn-light">Pregled po kategorijama</button>
+    </form>
+</div>
 
-<p>
-    <a asp-action="Create">Kreiraj novo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Naziv)
-            </th>        
-            <th>
-                @Html.DisplayNameFor(model => model.Sastojci)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naziv)
-            </td>           
-            <td>
-                <table>
-                    @for (int i = 0; i < item.Sastojci.Count; i++)
+<div id="jela">
+    @foreach (var jelo in Model)
+    {
+        <div class="jelo">
+            <h2>@jelo.Naziv</h2>
+            <hr />
+            <div class="vjezbe">
+                @foreach (var sastojak in jelo.Sastojci)
+                {
+                    if (i == 3)
                     {
-                        @:<tr>
-                            @item.Sastojci[i]
-                        @:</tr></br>
+                        break;
                     }
-                </table>
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Uredi</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Opis</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Obriši</a>
-            </td>
-        </tr>
+                    i++;
+                    <p>@sastojak</p>
+                }
+                @{ i = 0; }
+            </div>
+            <hr />
+            <div class="dugmad">
+                <form asp-action="Edit" style="display:inline;" method="get">
+                    <input type="text" name="id" value="@jelo.Id" hidden />
+                    <button class="btn btn-secondary">Uredi</button>
+                </form>
+                <form asp-action="Details" style="display:inline;" method="get">
+                    <input type="text" name="id" value="@jelo.Id" hidden />
+                    <button class="btn btn-info">Detaljnije</button>
+                </form>
+                <form asp-action="Delete" style="display:inline;" method="get">
+                    <input type="text" name="id" value="@jelo.Id" hidden />
+                    <button class="btn btn-danger">Obriši</button>
+                </form>
+
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<!--
+
+<a asp-action="Create">Kreiraj novi</a>
+
+    -->
+@section Styles {
+    <link rel="stylesheet" href="~/css/jela.css" />
 }
-    </tbody>
-</table>

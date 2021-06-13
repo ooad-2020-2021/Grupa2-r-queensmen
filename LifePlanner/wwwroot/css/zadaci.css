@@ -1,6 +1,11 @@
 ﻿body {
     background: url('../img/background.jpg');
     background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #zadaci {

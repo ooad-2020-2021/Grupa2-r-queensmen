@@ -1,4 +1,112 @@
-﻿#sveKategorije {
+﻿body {
+    background: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#naslov {
+    margin-bottom: 45px;
+    border-bottom: 2px solid white;
+    position: relative;
+}
+
+
+#naslov > form {
+    position: absolute;
+    right: 0;
+    top: 45%;
+}
+
+#naslov > h1 {
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+
+
+#kategorije {
+    margin: 0px;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: 70vh;
+    width: 100%;
+}
+
+#kategorije::-webkit-scrollbar {
+    display: none; /* Safari and Chrome, i za Operu od nase drage kolegice */
+}
+
+.kategorija > h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid white;
+    position: relative;
+}
+
+.kategorija {
+    min-width: 33%;
+    max-width: 33%;
+}
+
+.jelo {
+    background-color: white;
+    border-radius: 25px;
+    padding: 7px;
+    padding-top: 15px;
+    margin: 20px;
+    width: 320px;
+    font-weight: bold;
+}
+
+#dorucak {
+    border-right: 1px solid white;
+}
+
+#rucak {
+    border-right: 1px solid white;
+}
+
+.dugmad {
+    
+}
+
+
+.formaDodavanje > * {
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    width: 175px;
+    background: url('../img/food.ico') 96% / 15% no-repeat #EEE;
+    padding: 3px;
+}
+
+
+
+
+
+
+
+/*
+#sveKategorije {
     display: flex;
     justify-content: space-between;
 }
