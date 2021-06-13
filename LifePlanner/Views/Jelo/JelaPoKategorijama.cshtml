@@ -38,11 +38,11 @@
                 <form asp-action="DodajUKategoriju" method="post" class="jelo">
                     <p class="@item.Naziv">
                         @item.Naziv
-                        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
+                        <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
                     </p>
                     <input type="hidden" name="kategorija" value="0" style="display: inline;">
                     <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
-                    <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
+                    <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
                     @Html.AntiForgeryToken()
                 </form>
             }
@@ -72,16 +72,16 @@
         {
             if (item.Kategorija == KategorijaJela.Rucak)
             {
-                <form asp-action="DodajUKategoriju" method="post" class="jelo">
-                    <p class="@item.Naziv">
-                        @item.Naziv
-                        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
-                    </p>
-                    <input type="hidden" name="kategorija" value="0" style="display: inline;">
-                    <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
-                    <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
-                    @Html.AntiForgeryToken()
-                </form>
+    <form asp-action="DodajUKategoriju" method="post" class="jelo">
+        <p class="@item.Naziv">
+            @item.Naziv
+            <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
+        </p>
+        <input type="hidden" name="kategorija" value="0" style="display: inline;">
+        <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
+        @Html.AntiForgeryToken()
+    </form>
             }
         }
     </div>
@@ -110,16 +110,16 @@
         {
             if (item.Kategorija == KategorijaJela.Vecera)
             {
-                <form asp-action="DodajUKategoriju" method="post" class="jelo">
-                    <p class="@item.Naziv">
-                        @item.Naziv
-                        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
-                    </p>
-                    <input type="hidden" name="kategorija" value="0" style="display: inline;">
-                    <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+            <form asp-action="DodajUKategoriju" method="post" class="jelo">
+                <p class="@item.Naziv">
+                    @item.Naziv
                     <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
-                    @Html.AntiForgeryToken()
-                </form>
+                </p>
+                <input type="hidden" name="kategorija" value="0" style="display: inline;">
+                <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+                <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
+                @Html.AntiForgeryToken()
+            </form>
             }
         }
     </div>
