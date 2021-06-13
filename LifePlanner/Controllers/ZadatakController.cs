@@ -65,7 +65,10 @@ namespace LifePlanner.Controllers
             ViewBag.savjet = randomSavjet;
             ViewBag.datum = datum;
 
-            var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == DateTime.Today && r.Korisnik == korisnik);
+            //https://stackoverflow.com/questions/30887367/how-to-compare-sql-datetime-and-c-sharp-datetime
+            DateTime RuzniNepotrebniDatum = DateTime.ParseExact(DateTime.Today.ToString("d_M_yyyy"), "d_M_yyyy", null);
+
+            var raspolozenje = await _context.Raspolozenja.FirstOrDefaultAsync(r => r.Datum == RuzniNepotrebniDatum && r.Korisnik == korisnik);
             ViewBag.danasnjiDatum = DateTime.Today;
             if (raspolozenje != null)
             {
