@@ -37,17 +37,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    overflow-y: auto;
-    scrollbar-width: none;
-    height: 70vh;
-    width: 100%;
 }
 
 #kategorije::-webkit-scrollbar {
     display: none; /* Safari and Chrome, i za Operu od nase drage kolegice */
 }
 
-.kategorija > h2 {
+h2 {
     color: white;
     font-size: 30px;
     margin-bottom: 30px;
@@ -55,9 +51,24 @@
     position: relative;
 }
 
-.kategorija {
-    min-width: 33%;
-    max-width: 33%;
+.kategorija {  
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: 65vh;
+}
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+    .kategorija {
+        height: 55vh;
+    }
+}
+
+
+
+.kategorija::-webkit-scrollbar {
+    display: none; /* Safari and Chrome, i za Operu od nase drage kolegice */
 }
 
 .jelo {
@@ -70,13 +81,7 @@
     font-weight: bold;
 }
 
-#dorucak {
-    border-right: 1px solid white;
-}
 
-#rucak {
-    border-right: 1px solid white;
-}
 
 .dugmad {
     

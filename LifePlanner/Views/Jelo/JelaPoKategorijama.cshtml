@@ -12,116 +12,122 @@
 </div>
 
 <div id="kategorije">
-    <div id="dorucak" class="kategorija">
+    <div id="dorucak">
         <h2>Doručak</h2>
-        @if (!Model.All(j => j.Kategorija == KategorijaJela.Dorucak))
-        {
-            <div class="dugmad">
-                <form asp-action="DodajUKategoriju" method="post" class="formaDodavanje">
-                    <input type="hidden" name="kategorija" value="1">
-                    <select name="idJela">
-                        @foreach (var item in Model)
-                        {
-                            if (item.Kategorija == KategorijaJela.Dorucak) continue;
-                            <option value="@item.Id">@item.Naziv</option>
-                        }
-                    </select>
-                    <input type="submit" value="Dodaj jelo" class="btn btn-md btn-light" />
-                    @Html.AntiForgeryToken()
-                </form>
-            </div>
-        }
-        @foreach (var item in Model)
-        {
-            if (item.Kategorija == KategorijaJela.Dorucak)
+        <div class="kategorija">
+            @if (!Model.All(j => j.Kategorija == KategorijaJela.Dorucak))
             {
-                <form asp-action="DodajUKategoriju" method="post" class="jelo">
-                    <p class="@item.Naziv">
-                        @item.Naziv
-                        <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
-                    </p>
-                    <input type="hidden" name="kategorija" value="0" style="display: inline;">
-                    <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
-                    <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
-                    @Html.AntiForgeryToken()
-                </form>
+                <div class="dugmad">
+                    <form asp-action="DodajUKategoriju" method="post" class="formaDodavanje">
+                        <input type="hidden" name="kategorija" value="1">
+                        <select name="idJela">
+                            @foreach (var item in Model)
+                            {
+                                if (item.Kategorija == KategorijaJela.Dorucak) continue;
+                                <option value="@item.Id">@item.Naziv</option>
+                            }
+                        </select>
+                        <input type="submit" value="Dodaj jelo" class="btn btn-md btn-light" />
+                        @Html.AntiForgeryToken()
+                    </form>
+                </div>
             }
-        }
+            @foreach (var item in Model)
+            {
+                if (item.Kategorija == KategorijaJela.Dorucak)
+                {
+                    <form asp-action="DodajUKategoriju" method="post" class="jelo">
+                        <p class="@item.Naziv">
+                            @item.Naziv
+                            <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
+                        </p>
+                        <input type="hidden" name="kategorija" value="0" style="display: inline;">
+                        <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+                        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
+                        @Html.AntiForgeryToken()
+                    </form>
+                }
+            }
+        </div>
     </div>
 
-    <div id="rucak" class="kategorija">
+    <div id="rucak">
         <h2>Ručak</h2>
-        @if (!Model.All(j => j.Kategorija == KategorijaJela.Rucak))
-        {
-            <div class="dugmad">
-                <form asp-action="DodajUKategoriju" method="post" class="formaDodavanje">
-                    <input type="hidden" name="kategorija" value="2">
-                    <select name="idJela">
-                        @foreach (var item in Model)
-                        {
-                            if (item.Kategorija == KategorijaJela.Rucak) continue;
-                            <option value="@item.Id">@item.Naziv</option>
-                        }
-                    </select>
-                    <input type="submit" value="Dodaj jelo" class="btn btn-md btn-light" />
-                    @Html.AntiForgeryToken()
-                </form>
-            </div>
-        }
-        @foreach (var item in Model)
-        {
-            if (item.Kategorija == KategorijaJela.Rucak)
+        <div class="kategorija">
+            @if (!Model.All(j => j.Kategorija == KategorijaJela.Rucak))
             {
-    <form asp-action="DodajUKategoriju" method="post" class="jelo">
-        <p class="@item.Naziv">
-            @item.Naziv
-            <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
-        </p>
-        <input type="hidden" name="kategorija" value="0" style="display: inline;">
-        <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
-        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
-        @Html.AntiForgeryToken()
-    </form>
+                <div class="dugmad">
+                    <form asp-action="DodajUKategoriju" method="post" class="formaDodavanje">
+                        <input type="hidden" name="kategorija" value="2">
+                        <select name="idJela">
+                            @foreach (var item in Model)
+                            {
+                                if (item.Kategorija == KategorijaJela.Rucak) continue;
+                                <option value="@item.Id">@item.Naziv</option>
+                            }
+                        </select>
+                        <input type="submit" value="Dodaj jelo" class="btn btn-md btn-light" />
+                        @Html.AntiForgeryToken()
+                    </form>
+                </div>
             }
-        }
+            @foreach (var item in Model)
+            {
+                if (item.Kategorija == KategorijaJela.Rucak)
+                {
+                    <form asp-action="DodajUKategoriju" method="post" class="jelo">
+                        <p class="@item.Naziv">
+                            @item.Naziv
+                            <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
+                        </p>
+                        <input type="hidden" name="kategorija" value="0" style="display: inline;">
+                        <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+                        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
+                        @Html.AntiForgeryToken()
+                    </form>
+                }
+            }
+        </div>
     </div>
 
 
-    <div id="vecera" class="kategorija">
+    <div id="vecera">
         <h2>Večera</h2>
-        @if (!Model.All(j => j.Kategorija == KategorijaJela.Vecera))
-        {
-            <div class="dugmad">
-                <form asp-action="DodajUKategoriju" method="post" class="formaDodavanje">
-                    <input type="hidden" name="kategorija" value="3">
-                    <select name="idJela">
-                        @foreach (var item in Model)
-                        {
-                            if (item.Kategorija == KategorijaJela.Vecera) continue;
-                            <option value="@item.Id">@item.Naziv</option>
-                        }
-                    </select>
-                    <input type="submit" value="Dodaj jelo" class="btn btn-md btn-light" />
-                    @Html.AntiForgeryToken()
-                </form>
-            </div>
-        }
-        @foreach (var item in Model)
-        {
-            if (item.Kategorija == KategorijaJela.Vecera)
+        <div class="kategorija">
+            @if (!Model.All(j => j.Kategorija == KategorijaJela.Vecera))
             {
-            <form asp-action="DodajUKategoriju" method="post" class="jelo">
-                <p class="@item.Naziv">
-                    @item.Naziv
-                    <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
-                </p>
-                <input type="hidden" name="kategorija" value="0" style="display: inline;">
-                <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
-                <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
-                @Html.AntiForgeryToken()
-            </form>
+                <div class="dugmad">
+                    <form asp-action="DodajUKategoriju" method="post" class="formaDodavanje">
+                        <input type="hidden" name="kategorija" value="3">
+                        <select name="idJela">
+                            @foreach (var item in Model)
+                            {
+                                if (item.Kategorija == KategorijaJela.Vecera) continue;
+                                <option value="@item.Id">@item.Naziv</option>
+                            }
+                        </select>
+                        <input type="submit" value="Dodaj jelo" class="btn btn-md btn-light" />
+                        @Html.AntiForgeryToken()
+                    </form>
+                </div>
             }
-        }
+            @foreach (var item in Model)
+            {
+                if (item.Kategorija == KategorijaJela.Vecera)
+                {
+                    <form asp-action="DodajUKategoriju" method="post" class="jelo">
+                        <p class="@item.Naziv">
+                            @item.Naziv
+                            <input type="button" name="Opis" value="Opis jela" class="btn btn-sm btn-info" onclick="location.href='@Url.Action("Details", "Jelo", new { id = item.Id })'  " />
+                        </p>
+                        <input type="hidden" name="kategorija" value="0" style="display: inline;">
+                        <input type="hidden" name="idJela" value="@item.Id" style="display: inline;">
+                        <input type="submit" value="Ukloni jelo" style="display: inline;" class="btn btn-sm btn-danger" />
+                        @Html.AntiForgeryToken()
+                    </form>
+                }
+            }
+        </div>
     </div>
 </div>
 
