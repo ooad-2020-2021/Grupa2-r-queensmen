@@ -4,8 +4,9 @@
     Layout = "_layout";
 }
 
-<h1 style="text-align: center;">Kalendar za raspoloženje</h1>
-<hr/>
+<div id="naslov">
+    <h1>Kalendar za raspoloženja</h1>
+</div>
 
 <div id="glavno">
     <div class="calendar light">
@@ -42,26 +43,26 @@
     @if (Model == null)
     {
         @:
-        <form asp-action="Create" method="POST">
+        <form asp-action="Create" method="POST" class="formaDodavanje">
             <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
             <p>
-                Na dan @ViewBag.datum osjećao/la sam se:
+                Na dan <span class="datum">@ViewBag.datum</span> osjećao/la sam se:
                 <select asp-items="Html.GetEnumSelectList<TipRaspolozenja>()" name="TipRaspolozenja">
                     <option selected="selected" value="" disabled>Molimo odaberite</option>
                 </select>
             </p>
-            <input type="submit" value="Spasi" />
+            <input type="submit" value="Spasi" class="btn btn-primary"/>
             @Html.AntiForgeryToken()
         </form>
     }
     else
     {
         @:
-        <form asp-action="Edit" method="POST">
+        <form asp-action="Edit" method="POST" class="formaDodavanje">
             <input type="text" name="id" value="@Model.Id" hidden />
             <input type="datetime" name="Datum" value="@ViewBag.datumFull" hidden />
             <p>
-                Na dan @ViewBag.datum osjećao/la sam se:
+                Na dan <span class="datum">@ViewBag.datum</span> osjećao/la sam se:
                 <select name="TipRaspolozenja">
                     @if ((int)Model.TipRaspolozenja == 0)
                     {
@@ -85,7 +86,7 @@
                     }
                 </select>
             </p>
-            <input type="submit" value="Spasi" />
+            <input type="submit" value="Spasi" class="btn btn-success"/>
             @Html.AntiForgeryToken()
         </form>
     }
@@ -98,4 +99,5 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/kalendar.css" />
+    <link rel="stylesheet" href="~/css/raspolozenje.css" />
 }

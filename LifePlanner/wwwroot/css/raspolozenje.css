@@ -1,0 +1,51 @@
+﻿body {
+    background: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#naslov {
+    margin-bottom: 25px;
+    border-bottom: 2px solid white;
+    position: relative;
+}
+
+
+#naslov > h1 {
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.formaDodavanje {
+    background-color: white;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+#glavno > div {
+    border-radius: 30px;
+}
+
+#glavno > form {
+    border-radius: 30px;
+}
+
+.datum {
+    font-weight: bold;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    width: 125px;
+    background: url('../img/face.ico') 96% / 20% no-repeat #EEE;
+    padding: 3px;
+}
