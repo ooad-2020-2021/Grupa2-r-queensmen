@@ -40,8 +40,8 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Trening/Details/5
-        [ActionName("Details")]
-        public async Task<IActionResult> Index(Guid? id)
+        [ActionName("Opis")]
+        public async Task<IActionResult> Opis(Guid? id)
         {
             if (id == null)
             {
@@ -59,8 +59,8 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Trening/Create
-        [ActionName("Create")]
-        public IActionResult DodajTrening()
+        [ActionName("Kreiraj")]
+        public IActionResult KreirajTrening()
         {
             return View();
         }
@@ -68,9 +68,9 @@ namespace LifePlanner.Controllers
         // POST: Trening/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Create")]
+        [HttpPost, ActionName("Kreiraj")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DodajTrening([Bind("Id,Naziv,Vjezbe")] Trening trening)
+        public async Task<IActionResult> KreirajTrening([Bind("Id,Naziv,Vjezbe")] Trening trening)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Trening/Edit/5
-        [ActionName("Edit")]
+        [ActionName("Uredi")]
         public async Task<IActionResult> UrediTrening(Guid? id)
         {
             if (id == null)
@@ -112,7 +112,7 @@ namespace LifePlanner.Controllers
         // POST: Trening/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost, ActionName("Uredi")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UrediTrening(Guid id, [Bind("Id,Naziv,Vjezbe")] Trening trening)
         {
@@ -146,7 +146,7 @@ namespace LifePlanner.Controllers
         }
 
         // GET: Trening/Delete/5
-        [ActionName("Delete")]
+        [ActionName("Obrisi")]
         public async Task<IActionResult> ObrisiTrening(Guid? id)
         {
             if (id == null)
@@ -165,7 +165,7 @@ namespace LifePlanner.Controllers
         }
 
         // POST: Trening/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Obrisi")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ObrisiTrening(Guid id)
         {

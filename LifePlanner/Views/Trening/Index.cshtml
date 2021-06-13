@@ -7,7 +7,7 @@
 
 <div id="naslov">
     <h1>Treninzi</h1>
-    <form asp-action="Create" style="display:inline;" method="get" id="dodaj">
+    <form asp-action="Kreiraj" style="display:inline;" method="get" id="dodaj">
         <button class="btn btn-light">Dodaj novi</button>
     </form>
     <form asp-action="Sort" style="display:inline;" method="get" id="sortiraj">
@@ -35,15 +35,15 @@
             </div>
             <hr />
             <div class="dugmad">
-                <form asp-action="Edit" style="display:inline;" method="get">
+                <form asp-action="Uredi" style="display:inline;" method="get">
                     <input type="text" name="id" value="@trening.Id" hidden />
                     <button class="btn btn-secondary">Uredi</button>
                 </form>
-                <form asp-action="Details" style="display:inline;" method="get">
+                <form asp-action="Opis" style="display:inline;" method="get">
                     <input type="text" name="id" value="@trening.Id" hidden />
                     <button class="btn btn-info">Detaljnije</button>
                 </form>
-                <form asp-action="Delete" style="display:inline;" method="get">
+                <form asp-action="Obrisi" style="display:inline;" method="get">
                     <input type="text" name="id" value="@trening.Id" hidden />
                     <button class="btn btn-danger">Obriši</button>
                 </form>
