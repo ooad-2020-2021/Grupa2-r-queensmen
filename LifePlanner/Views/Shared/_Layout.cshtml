@@ -1,5 +1,5 @@
 ﻿@{ 
-    var danasnjiDatum = DateTime.Now.ToString("d_M_yyyy");
+    var danasnjiDatum = DateTime.UtcNow.AddHours(2).ToString("d_M_yyyy");
     //za request
     var datumZaRequest = new Dictionary<string, string>
     {

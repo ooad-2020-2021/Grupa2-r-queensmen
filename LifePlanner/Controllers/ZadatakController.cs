@@ -107,7 +107,7 @@ namespace LifePlanner.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.UtcNow.AddHours(2)) });
         }
 
         // POST: Zadatak/Edit/5
@@ -142,7 +142,7 @@ namespace LifePlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.UtcNow.AddHours(2)) });
         }
 
         // POST: Zadatak/Delete/5
@@ -162,6 +162,11 @@ namespace LifePlanner.Controllers
             _context.Zadaci.Remove(zadatak);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(zadatak.Datum) });
+        }
+
+        public IActionResult Test()
+        {
+            return Content(DateTime.Now.ToString() + "\n" + DateTime.UtcNow.AddHours(2).ToString());
         }
 
         private bool ZadatakExists(Guid id)

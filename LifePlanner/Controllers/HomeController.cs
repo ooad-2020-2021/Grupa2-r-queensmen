@@ -20,7 +20,7 @@ namespace LifePlanner.Controllers
 
         public IActionResult Index()
         {
-            var stringDatum = DateTime.Today.ToString("d_M_yyyy");
+            var stringDatum = DateTime.UtcNow.AddHours(2).ToString("d_M_yyyy");
             return RedirectToAction("Index", "Zadatak", new { datumString = stringDatum });
         }
 

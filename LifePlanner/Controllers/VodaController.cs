@@ -50,7 +50,7 @@ namespace LifePlanner.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(voda.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.UtcNow.AddHours(2)) });
         }
 
         // POST: Voda/Edit/5
@@ -85,7 +85,7 @@ namespace LifePlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(voda.Datum) });
             }
-            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.Now) });
+            return RedirectToAction(nameof(Index), new { datumString = DajDatumZaParametra(DateTime.UtcNow.AddHours(2)) });
         }
 
         private bool VodaExists(Guid id)
