@@ -58,7 +58,7 @@ namespace LifePlanner
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<RegistrovaniKorisnik>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<RegistrovaniKorisnik>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<IdentityOptions>(options =>
